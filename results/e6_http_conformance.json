@@ -1,0 +1,146 @@
+[
+  {
+    "profile": "stripe_card_default",
+    "api_shape": "stripe",
+    "adapter": "http_stripe_shaped",
+    "clean_run": {
+      "sut": "http_stripe_shaped",
+      "profile": "stripe_card_default",
+      "suite": "model",
+      "tests": 16,
+      "api_calls": 2089,
+      "passed": 16,
+      "failed": 0,
+      "detected": false,
+      "violations": [],
+      "violation_count": 0,
+      "seconds": 2.1
+    },
+    "conforms": true,
+    "injected_defects": [
+      {
+        "defect": "M01_capture_after_close",
+        "detected": true,
+        "witness": "authorize(4) ; void() ; void()"
+      },
+      {
+        "defect": "M03_unbounded_over_capture",
+        "detected": true,
+        "witness": "authorize(4) ; capture(5, final=True)"
+      },
+      {
+        "defect": "M07_no_release",
+        "detected": true,
+        "witness": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+      }
+    ]
+  },
+  {
+    "profile": "stripe_multicapture",
+    "api_shape": "stripe",
+    "adapter": "http_stripe_shaped",
+    "clean_run": {
+      "sut": "http_stripe_shaped",
+      "profile": "stripe_multicapture",
+      "suite": "model",
+      "tests": 160,
+      "api_calls": 16535,
+      "passed": 160,
+      "failed": 0,
+      "detected": false,
+      "violations": [],
+      "violation_count": 0,
+      "seconds": 18.3
+    },
+    "conforms": true,
+    "injected_defects": [
+      {
+        "defect": "M01_capture_after_close",
+        "detected": true,
+        "witness": "authorize(4) ; void() ; void()"
+      },
+      {
+        "defect": "M03_unbounded_over_capture",
+        "detected": true,
+        "witness": "authorize(4) ; capture(5, final=True)"
+      },
+      {
+        "defect": "M07_no_release",
+        "detected": true,
+        "witness": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+      }
+    ]
+  },
+  {
+    "profile": "adyen_card_default",
+    "api_shape": "adyen",
+    "adapter": "http_adyen_shaped",
+    "clean_run": {
+      "sut": "http_adyen_shaped",
+      "profile": "adyen_card_default",
+      "suite": "model",
+      "tests": 21,
+      "api_calls": 3072,
+      "passed": 21,
+      "failed": 0,
+      "detected": false,
+      "violations": [],
+      "violation_count": 0,
+      "seconds": 2.7
+    },
+    "conforms": true,
+    "injected_defects": [
+      {
+        "defect": "M01_capture_after_close",
+        "detected": true,
+        "witness": "authorize(4) ; void() ; void()"
+      },
+      {
+        "defect": "M03_unbounded_over_capture",
+        "detected": true,
+        "witness": "authorize(4) ; capture(5, final=True)"
+      },
+      {
+        "defect": "M07_no_release",
+        "detected": true,
+        "witness": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+      }
+    ]
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "api_shape": "adyen",
+    "adapter": "http_adyen_shaped",
+    "clean_run": {
+      "sut": "http_adyen_shaped",
+      "profile": "adyen_multiple_partial_captures",
+      "suite": "model",
+      "tests": 151,
+      "api_calls": 20094,
+      "passed": 151,
+      "failed": 0,
+      "detected": false,
+      "violations": [],
+      "violation_count": 0,
+      "seconds": 23.5
+    },
+    "conforms": true,
+    "injected_defects": [
+      {
+        "defect": "M01_capture_after_close",
+        "detected": true,
+        "witness": "authorize(4) ; void() ; void()"
+      },
+      {
+        "defect": "M03_unbounded_over_capture",
+        "detected": true,
+        "witness": "authorize(4) ; capture(5, final=True)"
+      },
+      {
+        "defect": "M07_no_release",
+        "detected": true,
+        "witness": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+      }
+    ]
+  }
+]

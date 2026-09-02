@@ -1,0 +1,122 @@
+[
+  {
+    "mutation": "S01_capture_ignores_expiry",
+    "description": "a final capture no longer checks the authorization deadline",
+    "profile": "stripe_multicapture",
+    "expected_property": "INV_NoCaptureAfterExpiry",
+    "first_property_to_fail": "INV_NoCaptureAfterExpiry",
+    "violation_kind": "invariant",
+    "counterexample_length": 7,
+    "caught_by_expected_property_alone": true,
+    "caught_by_any_property": true,
+    "seconds": 1.25
+  },
+  {
+    "mutation": "S02_capture_ignores_ceiling",
+    "description": "a final capture no longer checks the profile's capture ceiling",
+    "profile": "stripe_multicapture",
+    "expected_property": "INV_CaptureWithinLimit",
+    "first_property_to_fail": "TypeOK",
+    "violation_kind": "invariant",
+    "counterexample_length": 5,
+    "caught_by_expected_property_alone": true,
+    "caught_by_any_property": true,
+    "seconds": 1.18
+  },
+  {
+    "mutation": "S03_release_twice",
+    "description": "the hold may be released again after it has already been released",
+    "profile": "stripe_multicapture",
+    "expected_property": "INV_ReleaseAtMostOnce",
+    "first_property_to_fail": "INV_ReleaseAtMostOnce",
+    "violation_kind": "invariant",
+    "counterexample_length": 7,
+    "caught_by_expected_property_alone": true,
+    "caught_by_any_property": true,
+    "seconds": 1.21
+  },
+  {
+    "mutation": "S04_release_while_open",
+    "description": "held funds may be released before the hold closes",
+    "profile": "stripe_multicapture",
+    "expected_property": "INV_NoReleaseBeforeClose",
+    "first_property_to_fail": "INV_NoReleaseBeforeClose",
+    "violation_kind": "invariant",
+    "counterexample_length": 5,
+    "caught_by_expected_property_alone": true,
+    "caught_by_any_property": true,
+    "seconds": 1.38
+  },
+  {
+    "mutation": "S05_release_deadline_not_enforced",
+    "description": "time may pass while a release is overdue",
+    "profile": "stripe_multicapture",
+    "expected_property": "INV_BoundedRelease",
+    "first_property_to_fail": "INV_BoundedRelease",
+    "violation_kind": "invariant",
+    "counterexample_length": 7,
+    "caught_by_expected_property_alone": true,
+    "caught_by_any_property": true,
+    "seconds": 1.33
+  },
+  {
+    "mutation": "S06_non_final_budget_ignored",
+    "description": "the non-final capture budget is not enforced",
+    "profile": "stripe_multicapture",
+    "expected_property": "INV_CaptureCountWithinProfile",
+    "first_property_to_fail": "TypeOK",
+    "violation_kind": "invariant",
+    "counterexample_length": 6,
+    "caught_by_expected_property_alone": true,
+    "caught_by_any_property": true,
+    "seconds": 1.19
+  },
+  {
+    "mutation": "S07_close_forgets_captured_total",
+    "description": "closing a hold does not record what had been captured",
+    "profile": "stripe_multicapture",
+    "expected_property": "INV_NoCaptureAfterClose",
+    "first_property_to_fail": "INV_NoCaptureAfterClose",
+    "violation_kind": "invariant",
+    "counterexample_length": 3,
+    "caught_by_expected_property_alone": true,
+    "caught_by_any_property": true,
+    "seconds": 1.42
+  },
+  {
+    "mutation": "S08_no_release_fairness",
+    "description": "nothing obliges the provider to ever release the funds",
+    "profile": "stripe_multicapture",
+    "expected_property": "LIVE_EventualRelease",
+    "first_property_to_fail": "LIVE_EventualRelease",
+    "violation_kind": "property",
+    "counterexample_length": 8,
+    "caught_by_expected_property_alone": true,
+    "caught_by_any_property": true,
+    "seconds": 1.3
+  },
+  {
+    "mutation": "S09_no_expiry_fairness",
+    "description": "nothing obliges the provider to ever expire a stale authorization",
+    "profile": "stripe_multicapture",
+    "expected_property": "LIVE_EventualClose",
+    "first_property_to_fail": "LIVE_EventualRelease",
+    "violation_kind": "property",
+    "counterexample_length": 8,
+    "caught_by_expected_property_alone": true,
+    "caught_by_any_property": true,
+    "seconds": 1.31
+  },
+  {
+    "mutation": "S10_no_authorize_fairness",
+    "description": "the hold need never be created",
+    "profile": "stripe_multicapture",
+    "expected_property": "LIVE_Termination",
+    "first_property_to_fail": "LIVE_EventualRelease",
+    "violation_kind": "property",
+    "counterexample_length": 2,
+    "caught_by_expected_property_alone": true,
+    "caught_by_any_property": true,
+    "seconds": 1.38
+  }
+]

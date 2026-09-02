@@ -1,0 +1,13 @@
+\begin{tabular}{lccccccl}
+\toprule
+Profile & Validity & Captures & Over- & Final- & Void after & Remainder released by \\
+        & (days)   & allowed  & capture & capture flag & partial capture & \\
+\midrule
+Stripe, card default & 7 & 1 & 0\% & yes & no & automatic on partial capture \\
+Stripe, multicapture & 7 & 51 & 0\% & yes & no & zero-amount capture with final\_capture=true \\
+Stripe, overcapture & 7 & 1 & 15\% & yes & no & automatic on partial capture \\
+Adyen, card default & 10 & 1 & 0\% & yes & no & automatic on partial capture \\
+Adyen, multiple partial captures & 10 & not fixed & 0\% & no & yes & explicit cancel of the remaining amount \\
+Incremental auth (synthetic) & 7 & 2 & 0\% & yes & yes & explicit cancel of the remaining amount \\
+\bottomrule
+\end{tabular}

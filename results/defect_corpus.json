@@ -1,0 +1,2675 @@
+[
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; void()"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=True) ; capture(1, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; increase_auth(3) ; increase_auth(4) ; capture(3, final=False) ; capture(3, final=False) ; capture(4, final=True) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; increase_auth(3) ; increase_auth(4) ; capture(3, final=False) ; capture(3, final=False) ; capture(4, final=True) ; capture(1, final=False) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; void() ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; void() ; capture(5, final=True) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; void() ; capture(5, final=True) ; capture(2, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=False)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=False)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(1, final=False)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M07_no_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M08_late_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(multicapture_unavailable)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(multicapture_unavailable)",
+    "script": "authorize(4) ; capture(2, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(multicapture_unavailable)",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "capture(5, final=True) ; capture(2, final=True) ; capture(0, final=True) ; increase_auth(2) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; void()"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=True) ; capture(1, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True) ; capture(2, final=True) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; capture(1, final=False) ; capture(1, final=False)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=2)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=3)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; capture(1, final=False) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "void() ; capture(1, final=False) ; authorize(4) ; advance_time(1) ; capture(2, final=False) ; capture(3, final=True) ; capture(1, final=False) ; capture(1, final=False)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=3)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=4)",
+    "script": "void() ; capture(1, final=False) ; authorize(4) ; advance_time(1) ; capture(2, final=False) ; capture(3, final=True) ; capture(1, final=False) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(5, final=False) ; authorize(4) ; capture(1, final=False) ; increase_auth(4) ; capture(1, final=False) ; capture(1, final=False)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=2)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=3)",
+    "script": "capture(5, final=False) ; authorize(4) ; capture(1, final=False) ; increase_auth(4) ; capture(1, final=False) ; capture(4, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M07_no_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M08_late_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M09_void_after_partial",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; void()"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M09_void_after_partial",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; increase_auth(3) ; increase_auth(4) ; capture(3, final=False) ; void()"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M09_void_after_partial",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=3)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=3)",
+    "script": "authorize(4) ; increase_auth(3) ; increase_auth(4) ; capture(3, final=False) ; capture(3, final=False)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M09_void_after_partial",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1) ; increase_auth(4) ; capture(4, final=False) ; void()"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=1)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=2)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=2)",
+    "script": "authorize(4) ; capture(2, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=2)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=2)",
+    "script": "authorize(4) ; capture(5, final=True) ; capture(2, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=2)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=2)",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "capture(5, final=True) ; capture(2, final=True) ; capture(0, final=True) ; increase_auth(2) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; void()"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=True) ; capture(1, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; increase_auth(1) ; increase_auth(2) ; capture(3, final=False) ; capture(3, final=False) ; increase_auth(4) ; capture(4, final=True) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=True) ; capture(6, final=True) ; capture(2, final=False) ; increase_auth(4) ; authorize(4) ; capture(2, final=True) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=True) ; capture(6, final=True) ; capture(2, final=False) ; increase_auth(4) ; authorize(4) ; capture(2, final=True) ; increase_auth(3) ; capture(0, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(6, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=6)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(6, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(6, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=6)",
+    "script": "authorize(4) ; increase_auth(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; capture(6, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=6)",
+    "script": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(6, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=6)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(6, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(6, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=6)",
+    "script": "authorize(4) ; increase_auth(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; capture(6, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=6)",
+    "script": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=False)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=False)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "authorize(4) ; increase_auth(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; capture(1, final=False)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M07_no_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M08_late_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(multicapture_unavailable)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(multicapture_unavailable)",
+    "script": "authorize(4) ; capture(2, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(multicapture_unavailable)",
+    "script": "advance_time(1) ; capture(1, final=True) ; authorize(4) ; capture(2, final=False) ; capture(3, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(multicapture_unavailable)",
+    "script": "capture(4, final=True) ; capture(6, final=True) ; capture(2, final=False) ; increase_auth(4) ; authorize(4) ; capture(2, final=True)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "capture(5, final=True) ; increase_auth(4) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_overcapture",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; increase_auth(3) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; void()"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=True) ; capture(1, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; increase_auth(3) ; increase_auth(4) ; capture(3, final=False) ; capture(3, final=False) ; capture(4, final=True) ; capture(0, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; increase_auth(3) ; increase_auth(4) ; capture(3, final=False) ; capture(3, final=False) ; capture(4, final=True) ; capture(1, final=False) ; capture(0, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(0, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; capture(0, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; void() ; capture(0, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; void() ; capture(5, final=True) ; capture(0, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; void() ; capture(5, final=True) ; capture(2, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=False)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=False)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(1, final=False)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M07_no_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M08_late_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(multicapture_unavailable)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; capture(1, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(multicapture_unavailable)",
+    "script": "authorize(4) ; capture(2, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(multicapture_unavailable)",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "capture(5, final=True) ; capture(2, final=True) ; capture(0, final=True) ; increase_auth(2) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "advance_time(1) ; authorize(4) ; capture(4, final=False) ; increase_auth(2) ; capture(4, final=True) ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "advance_time(1) ; authorize(4) ; capture(4, final=False) ; increase_auth(2) ; capture(4, final=True) ; capture(3, final=False) ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "advance_time(1) ; authorize(4) ; capture(4, final=False) ; increase_auth(2) ; capture(4, final=True) ; capture(3, final=False) ; capture(2, final=False) ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; void() ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; void() ; capture(5, final=True) ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; capture(1, final=False) ; capture(1, final=False)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=2)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=3)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; capture(1, final=False) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; capture(1, final=False) ; capture(1, final=False)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=2)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=3)",
+    "script": "authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; capture(1, final=False) ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "capture(1, final=True) ; authorize(4) ; capture(4, final=False) ; void() ; advance_time(1) ; capture(3, final=False) ; capture(0, final=True) ; capture(3, final=True) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M07_no_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M08_late_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(2, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "authorize(4) ; increase_auth(3)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(4, final=False) ; authorize(4) ; capture(1, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "capture(5, final=True) ; capture(2, final=True) ; capture(0, final=True) ; increase_auth(2) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; void()"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=True) ; capture(1, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(6, final=True) ; increase_auth(4) ; increase_auth(6) ; authorize(4) ; increase_auth(4) ; capture(5, final=True) ; capture(1, final=True) ; void()"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; increase_auth(6) ; advance_time(1) ; capture(3, final=True) ; void()"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; increase_auth(6) ; advance_time(1) ; capture(3, final=True) ; increase_auth(2)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; capture(7, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "increase_auth(2) ; increase_auth(6) ; capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(not_adjustable)",
+    "script": "increase_auth(2) ; increase_auth(6) ; capture(4, final=False) ; authorize(4) ; increase_auth(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; capture(7, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "increase_auth(2) ; increase_auth(6) ; capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M04_ceiling_off_by_one",
+    "kind": "accept",
+    "expected": "accepted",
+    "actual": "rejected(not_adjustable)",
+    "script": "increase_auth(2) ; increase_auth(6) ; capture(4, final=False) ; authorize(4) ; increase_auth(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; capture(1, final=False)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=1)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=2)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "accept",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(1, final=False) ; capture(1, final=False)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(7, final=True) ; increase_auth(6) ; increase_auth(4) ; capture(7, final=False) ; capture(3, final=False) ; capture(1, final=False)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=3)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=4)",
+    "script": "authorize(4) ; capture(7, final=True) ; increase_auth(6) ; increase_auth(4) ; capture(7, final=False) ; capture(3, final=False) ; capture(3, final=False)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "capture(5, final=True) ; capture(5, final=False) ; capture(2, final=False) ; increase_auth(5) ; authorize(4) ; capture(2, final=False) ; capture(1, final=False)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M05_extra_non_final_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=2)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=3)",
+    "script": "capture(5, final=True) ; capture(5, final=False) ; capture(2, final=False) ; increase_auth(5) ; authorize(4) ; capture(2, final=False) ; capture(4, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M06_double_release",
+    "kind": "released",
+    "expected": "released in [0, 1]",
+    "actual": "2",
+    "script": "authorize(4) ; increase_auth(5) ; void() ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M07_no_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M08_late_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=1)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=2)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=2)",
+    "script": "authorize(4) ; capture(2, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=1)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+    "script": "capture(6, final=True) ; increase_auth(4) ; increase_auth(6) ; authorize(4) ; increase_auth(4) ; capture(5, final=True) ; capture(1, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M10_partial_capture_keeps_hold",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=3)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=3)",
+    "script": "authorize(4) ; increase_auth(6) ; advance_time(1) ; capture(3, final=True)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M11_expire_one_tick_late",
+    "kind": "observation",
+    "expected": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "script": "authorize(4) ; advance_time(1) ; increase_auth(5) ; advance_time(1) ; capture(6, final=True) ; capture(6, final=True) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "increase_auth(2) ; authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "incremental_auth",
+    "transport": "in_process",
+    "injected_defect": "M12_release_before_close",
+    "kind": "released",
+    "expected": "released in [0]",
+    "actual": "1",
+    "script": "authorize(4) ; increase_auth(6) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; void()"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "http",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "http",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_card_default",
+    "transport": "http",
+    "injected_defect": "M07_no_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; void()"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "http",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "http",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "stripe_multicapture",
+    "transport": "http",
+    "injected_defect": "M07_no_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; void()"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "http",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "http",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_card_default",
+    "transport": "http",
+    "injected_defect": "M07_no_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; void()"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "http",
+    "injected_defect": "M01_capture_after_close",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "http",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "reject",
+    "expected": "rejected",
+    "actual": "accepted",
+    "script": "authorize(4) ; capture(5, final=True)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "http",
+    "injected_defect": "M03_unbounded_over_capture",
+    "kind": "observation",
+    "expected": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+    "actual": "Observation(status='CLOSED', auth_amount=4, captured_total=5)",
+    "script": "authorize(4) ; advance_time(1)"
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "transport": "http",
+    "injected_defect": "M07_no_release",
+    "kind": "released",
+    "expected": "released in [1]",
+    "actual": "0",
+    "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)"
+  }
+]

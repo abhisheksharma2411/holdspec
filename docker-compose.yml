@@ -1,0 +1,46 @@
+# Brings up the parts of the harness that are services: a Postgres instance for
+# the conformance run log and defect corpus, and one mock PSP per API shape.
+#
+#   docker compose up -d
+#   HOLDSPEC_DATABASE_URL=postgresql://holdspec:holdspec@localhost:55432/holdspec \
+#     make experiments
+#
+# Nothing here is required to reproduce the results: without Docker the mock PSPs
+# are started as subprocesses and the run log falls back to SQLite.
+
+services:
+  postgres:
+    image: postgres:16.4-alpine
+    environment:
+      POSTGRES_USER: holdspec
+      POSTGRES_PASSWORD: holdspec
+      POSTGRES_DB: holdspec
+    ports:
+      - "55432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U holdspec -d holdspec"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  psp-stripe:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      MOCK_API: stripe
+      MOCK_PROFILE: stripe_multicapture
+      MOCK_PORT: "8080"
+    ports:
+      - "8091:8080"
+
+  psp-adyen:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      MOCK_API: adyen
+      MOCK_PROFILE: adyen_multiple_partial_captures
+      MOCK_PORT: "8080"
+    ports:
+      - "8092:8080"

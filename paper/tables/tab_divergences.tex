@@ -1,0 +1,18 @@
+\begin{tabular}{p{3.0cm}p{2.5cm}p{2.5cm}p{7.4cm}}
+\toprule
+Call & Left provider & Right provider & Shortest witness \\
+\midrule
+\multicolumn{4}{l}{\textit{Stripe, card default} (left) vs.\ \textit{Adyen, card default} (right)} \\
+advance\_time & status CLOSED & status HELD & \texttt{\scriptsize auth(4) ; wait$\times$3} \\
+\addlinespace
+\multicolumn{4}{l}{\textit{Stripe, multicapture} (left) vs.\ \textit{Adyen, multiple partial captures} (right)} \\
+capture (final), amount 0, 1, 2, 3 & accepted & rejected & \texttt{\scriptsize auth(4) ; cap(1,fin)} \\
+capture (non-final), amount 1, 2, 3, 4 & accepted & rejected & \texttt{\scriptsize auth(4) ; cap(4,part)} \\
+void & rejected & accepted & \texttt{\scriptsize auth(4) ; cap(1,part) ; void} \\
+advance\_time & status CLOSED & status HELD & \texttt{\scriptsize auth(4) ; wait$\times$3} \\
+\addlinespace
+\multicolumn{4}{l}{\textit{Stripe, overcapture} (left) vs.\ \textit{Adyen, card default} (right)} \\
+capture (final), amount 5 & accepted & rejected & \texttt{\scriptsize auth(4) ; cap(5,fin)} \\
+advance\_time & status CLOSED & status HELD & \texttt{\scriptsize auth(4) ; wait$\times$3} \\
+\bottomrule
+\end{tabular}

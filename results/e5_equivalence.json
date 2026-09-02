@@ -1,0 +1,62 @@
+[
+  {
+    "profile": "stripe_card_default",
+    "tlc_states": 131,
+    "python_states": 131,
+    "only_in_tlc": 0,
+    "only_in_python": 0,
+    "identical": true,
+    "example_only_in_tlc": null,
+    "example_only_in_python": null
+  },
+  {
+    "profile": "stripe_multicapture",
+    "tlc_states": 642,
+    "python_states": 642,
+    "only_in_tlc": 0,
+    "only_in_python": 0,
+    "identical": true,
+    "example_only_in_tlc": null,
+    "example_only_in_python": null
+  },
+  {
+    "profile": "stripe_overcapture",
+    "tlc_states": 155,
+    "python_states": 155,
+    "only_in_tlc": 0,
+    "only_in_python": 0,
+    "identical": true,
+    "example_only_in_tlc": null,
+    "example_only_in_python": null
+  },
+  {
+    "profile": "adyen_card_default",
+    "tlc_states": 182,
+    "python_states": 182,
+    "only_in_tlc": 0,
+    "only_in_python": 0,
+    "identical": true,
+    "example_only_in_tlc": null,
+    "example_only_in_python": null
+  },
+  {
+    "profile": "adyen_multiple_partial_captures",
+    "tlc_states": 738,
+    "python_states": 738,
+    "only_in_tlc": 0,
+    "only_in_python": 0,
+    "identical": true,
+    "example_only_in_tlc": null,
+    "example_only_in_python": null
+  },
+  {
+    "profile": "incremental_auth",
+    "tlc_states": 2248,
+    "python_states": 2248,
+    "only_in_tlc": 0,
+    "only_in_python": 0,
+    "identical": true,
+    "example_only_in_tlc": null,
+    "example_only_in_python": null
+  }
+]

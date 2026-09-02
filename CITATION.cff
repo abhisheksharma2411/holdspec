@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use HoldSpec, please cite it as below."
+title: "HoldSpec: a machine-checked model and conformance suite for the payment authorization hold lifecycle"
+abstract: >-
+  A TLA+ state machine for the payment service provider authorization hold
+  lifecycle -- authorize, partial and multiple capture, void, expiry,
+  incremental authorization, and the release of held funds -- parameterized by a
+  provider capability profile, together with a conformance suite generated from
+  the model and executable black-box against a provider API.
+type: software
+authors:
+  - family-names: Sharma
+    given-names: Abhishek
+    email: abhicse24@gmail.com
+    orcid: "https://orcid.org/0009-0002-6116-0398"
+    affiliation: "IEEE Senior Member"
+repository-code: "https://github.com/abhisheksharma2411/holdspec"
+url: "https://abhisharma.co.in"
+license: MIT
+version: "1.0.0"
+date-released: "2026-09-01"
+keywords:
+  - formal methods
+  - TLA+
+  - model checking
+  - conformance testing
+  - model-based testing
+  - payment systems
+  - authorization and capture

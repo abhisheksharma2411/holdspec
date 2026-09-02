@@ -1,0 +1,2517 @@
+{
+  "seed": 20260901,
+  "per_profile": [
+    {
+      "profile": "stripe_card_default",
+      "provider": "Stripe",
+      "suites": {
+        "model": {
+          "tests": 16,
+          "api_calls": 2089,
+          "negative_checks": true
+        },
+        "handwritten": {
+          "tests": 8,
+          "api_calls": 21,
+          "negative_checks": false
+        },
+        "random": {
+          "tests": 22,
+          "api_calls": 2110,
+          "negative_checks": true
+        },
+        "random_10x": {
+          "tests": 233,
+          "api_calls": 20919,
+          "negative_checks": true
+        }
+      },
+      "reference_self_check": {
+        "model": {
+          "sut": "reference",
+          "profile": "stripe_card_default",
+          "suite": "model",
+          "tests": 16,
+          "api_calls": 2089,
+          "passed": 16,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "handwritten": {
+          "sut": "reference",
+          "profile": "stripe_card_default",
+          "suite": "handwritten",
+          "tests": 8,
+          "api_calls": 21,
+          "passed": 8,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random": {
+          "sut": "reference",
+          "profile": "stripe_card_default",
+          "suite": "random",
+          "tests": 22,
+          "api_calls": 2110,
+          "passed": 22,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random_10x": {
+          "sut": "reference",
+          "profile": "stripe_card_default",
+          "suite": "random_10x",
+          "tests": 233,
+          "api_calls": 20919,
+          "passed": 233,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        }
+      },
+      "mutants": [
+        {
+          "mutant": "M01_capture_after_close",
+          "breaks": "INV_NoCaptureAfterClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()"
+            ],
+            "op": "void()",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; void() ; void()",
+            "length": 3
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; void()",
+            "handwritten": "authorize(4) ; capture(1, final=True) ; capture(1, final=True)",
+            "random": "authorize(4) ; increase_auth(3) ; increase_auth(4) ; capture(3, final=False) ; capture(3, final=False) ; capture(4, final=True) ; capture(0, final=True)",
+            "random_10x": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(0, final=True)"
+          }
+        },
+        {
+          "mutant": "M02_capture_after_expiry",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M03_unbounded_over_capture",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(5, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(5, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(5, final=True)",
+            "handwritten": "authorize(4) ; capture(5, final=True)",
+            "random": "authorize(4) ; capture(5, final=True)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+          }
+        },
+        {
+          "mutant": "M04_ceiling_off_by_one",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(5, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(5, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(5, final=True)",
+            "handwritten": "authorize(4) ; capture(5, final=True)",
+            "random": "authorize(4) ; capture(5, final=True)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+          }
+        },
+        {
+          "mutant": "M05_extra_non_final_capture",
+          "breaks": "INV_CaptureCountWithinProfile",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(1, final=False)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(1, final=False)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(1, final=False)",
+            "handwritten": null,
+            "random": "authorize(4) ; capture(1, final=False)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(1, final=False)"
+          }
+        },
+        {
+          "mutant": "M06_double_release",
+          "breaks": "INV_ReleaseAtMostOnce",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "2",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M07_no_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M08_late_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M09_void_after_partial",
+          "breaks": "profile Void guard",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M10_partial_capture_keeps_hold",
+          "breaks": "INV_HoldFullyReleased",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(1, final=True)",
+            "field": "accepted",
+            "left": "rejected",
+            "right": "accepted",
+            "script": "authorize(4) ; capture(1, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=True)",
+            "handwritten": "authorize(4) ; capture(2, final=True)",
+            "random": null,
+            "random_10x": "capture(3, final=False) ; authorize(4) ; capture(2, final=True)"
+          }
+        },
+        {
+          "mutant": "M11_expire_one_tick_late",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "advance_time(1)",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "observation",
+            "left": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+            "right": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+            "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M12_release_before_close",
+          "breaks": "INV_NoReleaseBeforeClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "1",
+            "right": "0",
+            "script": "authorize(4) ; advance_time(1)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1)",
+            "random": "capture(5, final=True) ; capture(2, final=True) ; capture(0, final=True) ; increase_auth(2) ; authorize(4) ; advance_time(1)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+          }
+        }
+      ],
+      "killable_mutants": 10,
+      "equivalent_mutants": 2,
+      "detection_rate": {
+        "model": 1.0,
+        "handwritten": 0.7,
+        "random": 0.5,
+        "random_10x": 0.6
+      },
+      "seconds": 0.5
+    },
+    {
+      "profile": "stripe_multicapture",
+      "provider": "Stripe",
+      "suites": {
+        "model": {
+          "tests": 160,
+          "api_calls": 16535,
+          "negative_checks": true
+        },
+        "handwritten": {
+          "tests": 9,
+          "api_calls": 25,
+          "negative_checks": false
+        },
+        "random": {
+          "tests": 182,
+          "api_calls": 16566,
+          "negative_checks": true
+        },
+        "random_10x": {
+          "tests": 1830,
+          "api_calls": 165366,
+          "negative_checks": true
+        }
+      },
+      "reference_self_check": {
+        "model": {
+          "sut": "reference",
+          "profile": "stripe_multicapture",
+          "suite": "model",
+          "tests": 160,
+          "api_calls": 16535,
+          "passed": 160,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "handwritten": {
+          "sut": "reference",
+          "profile": "stripe_multicapture",
+          "suite": "handwritten",
+          "tests": 9,
+          "api_calls": 25,
+          "passed": 9,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random": {
+          "sut": "reference",
+          "profile": "stripe_multicapture",
+          "suite": "random",
+          "tests": 182,
+          "api_calls": 16566,
+          "passed": 182,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random_10x": {
+          "sut": "reference",
+          "profile": "stripe_multicapture",
+          "suite": "random_10x",
+          "tests": 1830,
+          "api_calls": 165366,
+          "passed": 1830,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        }
+      },
+      "mutants": [
+        {
+          "mutant": "M01_capture_after_close",
+          "breaks": "INV_NoCaptureAfterClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()"
+            ],
+            "op": "void()",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; void() ; void()",
+            "length": 3
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; void()",
+            "handwritten": "authorize(4) ; capture(1, final=True) ; capture(1, final=True)",
+            "random": "authorize(4) ; capture(5, final=True) ; capture(2, final=True) ; capture(0, final=True)",
+            "random_10x": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(0, final=True)"
+          }
+        },
+        {
+          "mutant": "M02_capture_after_expiry",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M03_unbounded_over_capture",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(5, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(5, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(5, final=True)",
+            "handwritten": "authorize(4) ; capture(5, final=True)",
+            "random": "authorize(4) ; capture(5, final=True)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+          }
+        },
+        {
+          "mutant": "M04_ceiling_off_by_one",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(5, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(5, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(5, final=True)",
+            "handwritten": "authorize(4) ; capture(5, final=True)",
+            "random": "authorize(4) ; capture(5, final=True)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+          }
+        },
+        {
+          "mutant": "M05_extra_non_final_capture",
+          "breaks": "INV_CaptureCountWithinProfile",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "capture(1, final=False)",
+              "capture(1, final=False)"
+            ],
+            "op": "capture(1, final=False)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(1, final=False) ; capture(1, final=False) ; capture(1, final=False)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; capture(1, final=False) ; capture(1, final=False)",
+            "handwritten": null,
+            "random": "void() ; capture(1, final=False) ; authorize(4) ; advance_time(1) ; capture(2, final=False) ; capture(3, final=True) ; capture(1, final=False) ; capture(1, final=False)",
+            "random_10x": "capture(5, final=False) ; authorize(4) ; capture(1, final=False) ; increase_auth(4) ; capture(1, final=False) ; capture(1, final=False)"
+          }
+        },
+        {
+          "mutant": "M06_double_release",
+          "breaks": "INV_ReleaseAtMostOnce",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "2",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)"
+          }
+        },
+        {
+          "mutant": "M07_no_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M08_late_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M09_void_after_partial",
+          "breaks": "profile Void guard",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "capture(1, final=False)"
+            ],
+            "op": "void()",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(1, final=False) ; void()",
+            "length": 3
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; void()",
+            "handwritten": null,
+            "random": "authorize(4) ; increase_auth(3) ; increase_auth(4) ; capture(3, final=False) ; void()",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; advance_time(1) ; increase_auth(4) ; capture(4, final=False) ; void()"
+          }
+        },
+        {
+          "mutant": "M10_partial_capture_keeps_hold",
+          "breaks": "INV_HoldFullyReleased",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(1, final=True)",
+            "field": "observation",
+            "left": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+            "right": "Observation(status='CLOSED', auth_amount=4, captured_total=1)",
+            "script": "authorize(4) ; capture(1, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=True)",
+            "handwritten": "authorize(4) ; capture(2, final=True)",
+            "random": "authorize(4) ; capture(5, final=True) ; capture(2, final=True)",
+            "random_10x": "capture(3, final=False) ; authorize(4) ; capture(2, final=True)"
+          }
+        },
+        {
+          "mutant": "M11_expire_one_tick_late",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "advance_time(1)",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "observation",
+            "left": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+            "right": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+            "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M12_release_before_close",
+          "breaks": "INV_NoReleaseBeforeClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "1",
+            "right": "0",
+            "script": "authorize(4) ; advance_time(1)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1)",
+            "random": "capture(5, final=True) ; capture(2, final=True) ; capture(0, final=True) ; increase_auth(2) ; authorize(4) ; advance_time(1)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+          }
+        }
+      ],
+      "killable_mutants": 11,
+      "equivalent_mutants": 1,
+      "detection_rate": {
+        "model": 1.0,
+        "handwritten": 0.6363636363636364,
+        "random": 0.6363636363636364,
+        "random_10x": 0.7272727272727273
+      },
+      "seconds": 2.6
+    },
+    {
+      "profile": "stripe_overcapture",
+      "provider": "Stripe",
+      "suites": {
+        "model": {
+          "tests": 19,
+          "api_calls": 2748,
+          "negative_checks": true
+        },
+        "handwritten": {
+          "tests": 8,
+          "api_calls": 21,
+          "negative_checks": false
+        },
+        "random": {
+          "tests": 27,
+          "api_calls": 2770,
+          "negative_checks": true
+        },
+        "random_10x": {
+          "tests": 281,
+          "api_calls": 27508,
+          "negative_checks": true
+        }
+      },
+      "reference_self_check": {
+        "model": {
+          "sut": "reference",
+          "profile": "stripe_overcapture",
+          "suite": "model",
+          "tests": 19,
+          "api_calls": 2748,
+          "passed": 19,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "handwritten": {
+          "sut": "reference",
+          "profile": "stripe_overcapture",
+          "suite": "handwritten",
+          "tests": 8,
+          "api_calls": 21,
+          "passed": 8,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random": {
+          "sut": "reference",
+          "profile": "stripe_overcapture",
+          "suite": "random",
+          "tests": 27,
+          "api_calls": 2770,
+          "passed": 27,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random_10x": {
+          "sut": "reference",
+          "profile": "stripe_overcapture",
+          "suite": "random_10x",
+          "tests": 281,
+          "api_calls": 27508,
+          "passed": 281,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        }
+      },
+      "mutants": [
+        {
+          "mutant": "M01_capture_after_close",
+          "breaks": "INV_NoCaptureAfterClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()"
+            ],
+            "op": "void()",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; void() ; void()",
+            "length": 3
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; void()",
+            "handwritten": "authorize(4) ; capture(1, final=True) ; capture(1, final=True)",
+            "random": "authorize(4) ; increase_auth(1) ; increase_auth(2) ; capture(3, final=False) ; capture(3, final=False) ; increase_auth(4) ; capture(4, final=True) ; capture(0, final=True)",
+            "random_10x": "capture(4, final=True) ; capture(6, final=True) ; capture(2, final=False) ; increase_auth(4) ; authorize(4) ; capture(2, final=True) ; capture(0, final=True)"
+          }
+        },
+        {
+          "mutant": "M02_capture_after_expiry",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M03_unbounded_over_capture",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(6, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(6, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(6, final=True)",
+            "handwritten": "authorize(4) ; capture(6, final=True)",
+            "random": "authorize(4) ; capture(6, final=True)",
+            "random_10x": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; capture(6, final=True)"
+          }
+        },
+        {
+          "mutant": "M04_ceiling_off_by_one",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(6, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(6, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(6, final=True)",
+            "handwritten": "authorize(4) ; capture(6, final=True)",
+            "random": "authorize(4) ; capture(6, final=True)",
+            "random_10x": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; capture(6, final=True)"
+          }
+        },
+        {
+          "mutant": "M05_extra_non_final_capture",
+          "breaks": "INV_CaptureCountWithinProfile",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(1, final=False)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(1, final=False)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(1, final=False)",
+            "handwritten": null,
+            "random": "authorize(4) ; capture(1, final=False)",
+            "random_10x": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; capture(1, final=False)"
+          }
+        },
+        {
+          "mutant": "M06_double_release",
+          "breaks": "INV_ReleaseAtMostOnce",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "2",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M07_no_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M08_late_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M09_void_after_partial",
+          "breaks": "profile Void guard",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M10_partial_capture_keeps_hold",
+          "breaks": "INV_HoldFullyReleased",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(1, final=True)",
+            "field": "accepted",
+            "left": "rejected",
+            "right": "accepted",
+            "script": "authorize(4) ; capture(1, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=True)",
+            "handwritten": "authorize(4) ; capture(2, final=True)",
+            "random": "advance_time(1) ; capture(1, final=True) ; authorize(4) ; capture(2, final=False) ; capture(3, final=True)",
+            "random_10x": "capture(4, final=True) ; capture(6, final=True) ; capture(2, final=False) ; increase_auth(4) ; authorize(4) ; capture(2, final=True)"
+          }
+        },
+        {
+          "mutant": "M11_expire_one_tick_late",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "advance_time(1)",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "observation",
+            "left": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+            "right": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+            "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M12_release_before_close",
+          "breaks": "INV_NoReleaseBeforeClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "1",
+            "right": "0",
+            "script": "authorize(4) ; advance_time(1)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1)",
+            "random": "capture(5, final=True) ; increase_auth(4) ; authorize(4) ; advance_time(1)",
+            "random_10x": "increase_auth(4) ; capture(4, final=False) ; authorize(4) ; increase_auth(3) ; advance_time(1)"
+          }
+        }
+      ],
+      "killable_mutants": 10,
+      "equivalent_mutants": 2,
+      "detection_rate": {
+        "model": 1.0,
+        "handwritten": 0.7,
+        "random": 0.6,
+        "random_10x": 0.6
+      },
+      "seconds": 0.6
+    },
+    {
+      "profile": "adyen_card_default",
+      "provider": "Adyen",
+      "suites": {
+        "model": {
+          "tests": 21,
+          "api_calls": 3072,
+          "negative_checks": true
+        },
+        "handwritten": {
+          "tests": 8,
+          "api_calls": 22,
+          "negative_checks": false
+        },
+        "random": {
+          "tests": 30,
+          "api_calls": 3101,
+          "negative_checks": true
+        },
+        "random_10x": {
+          "tests": 309,
+          "api_calls": 30752,
+          "negative_checks": true
+        }
+      },
+      "reference_self_check": {
+        "model": {
+          "sut": "reference",
+          "profile": "adyen_card_default",
+          "suite": "model",
+          "tests": 21,
+          "api_calls": 3072,
+          "passed": 21,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "handwritten": {
+          "sut": "reference",
+          "profile": "adyen_card_default",
+          "suite": "handwritten",
+          "tests": 8,
+          "api_calls": 22,
+          "passed": 8,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random": {
+          "sut": "reference",
+          "profile": "adyen_card_default",
+          "suite": "random",
+          "tests": 30,
+          "api_calls": 3101,
+          "passed": 30,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random_10x": {
+          "sut": "reference",
+          "profile": "adyen_card_default",
+          "suite": "random_10x",
+          "tests": 309,
+          "api_calls": 30752,
+          "passed": 309,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        }
+      },
+      "mutants": [
+        {
+          "mutant": "M01_capture_after_close",
+          "breaks": "INV_NoCaptureAfterClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()"
+            ],
+            "op": "void()",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; void() ; void()",
+            "length": 3
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; void()",
+            "handwritten": "authorize(4) ; capture(1, final=True) ; capture(1, final=True)",
+            "random": "authorize(4) ; increase_auth(3) ; increase_auth(4) ; capture(3, final=False) ; capture(3, final=False) ; capture(4, final=True) ; capture(0, final=True)",
+            "random_10x": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(0, final=True)"
+          }
+        },
+        {
+          "mutant": "M02_capture_after_expiry",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M03_unbounded_over_capture",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(5, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(5, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(5, final=True)",
+            "handwritten": "authorize(4) ; capture(5, final=True)",
+            "random": "authorize(4) ; capture(5, final=True)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+          }
+        },
+        {
+          "mutant": "M04_ceiling_off_by_one",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(5, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(5, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(5, final=True)",
+            "handwritten": "authorize(4) ; capture(5, final=True)",
+            "random": "authorize(4) ; capture(5, final=True)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+          }
+        },
+        {
+          "mutant": "M05_extra_non_final_capture",
+          "breaks": "INV_CaptureCountWithinProfile",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(1, final=False)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(1, final=False)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(1, final=False)",
+            "handwritten": null,
+            "random": "authorize(4) ; capture(1, final=False)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(1, final=False)"
+          }
+        },
+        {
+          "mutant": "M06_double_release",
+          "breaks": "INV_ReleaseAtMostOnce",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "2",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M07_no_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M08_late_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M09_void_after_partial",
+          "breaks": "profile Void guard",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M10_partial_capture_keeps_hold",
+          "breaks": "INV_HoldFullyReleased",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(1, final=True)",
+            "field": "accepted",
+            "left": "rejected",
+            "right": "accepted",
+            "script": "authorize(4) ; capture(1, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; capture(1, final=True)",
+            "handwritten": "authorize(4) ; capture(2, final=True)",
+            "random": null,
+            "random_10x": "capture(3, final=False) ; authorize(4) ; capture(2, final=True)"
+          }
+        },
+        {
+          "mutant": "M11_expire_one_tick_late",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "advance_time(1)",
+              "advance_time(1)",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "observation",
+            "left": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+            "right": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+            "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "length": 5
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M12_release_before_close",
+          "breaks": "INV_NoReleaseBeforeClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "1",
+            "right": "0",
+            "script": "authorize(4) ; advance_time(1)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1)",
+            "random": "capture(5, final=True) ; capture(2, final=True) ; capture(0, final=True) ; increase_auth(2) ; authorize(4) ; advance_time(1)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+          }
+        }
+      ],
+      "killable_mutants": 10,
+      "equivalent_mutants": 2,
+      "detection_rate": {
+        "model": 1.0,
+        "handwritten": 0.7,
+        "random": 0.5,
+        "random_10x": 0.6
+      },
+      "seconds": 0.6
+    },
+    {
+      "profile": "adyen_multiple_partial_captures",
+      "provider": "Adyen",
+      "suites": {
+        "model": {
+          "tests": 151,
+          "api_calls": 20094,
+          "negative_checks": true
+        },
+        "handwritten": {
+          "tests": 9,
+          "api_calls": 26,
+          "negative_checks": false
+        },
+        "random": {
+          "tests": 202,
+          "api_calls": 20126,
+          "negative_checks": true
+        },
+        "random_10x": {
+          "tests": 2011,
+          "api_calls": 200962,
+          "negative_checks": true
+        }
+      },
+      "reference_self_check": {
+        "model": {
+          "sut": "reference",
+          "profile": "adyen_multiple_partial_captures",
+          "suite": "model",
+          "tests": 151,
+          "api_calls": 20094,
+          "passed": 151,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "handwritten": {
+          "sut": "reference",
+          "profile": "adyen_multiple_partial_captures",
+          "suite": "handwritten",
+          "tests": 9,
+          "api_calls": 26,
+          "passed": 9,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random": {
+          "sut": "reference",
+          "profile": "adyen_multiple_partial_captures",
+          "suite": "random",
+          "tests": 202,
+          "api_calls": 20126,
+          "passed": 202,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random_10x": {
+          "sut": "reference",
+          "profile": "adyen_multiple_partial_captures",
+          "suite": "random_10x",
+          "tests": 2011,
+          "api_calls": 200962,
+          "passed": 2011,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        }
+      },
+      "mutants": [
+        {
+          "mutant": "M01_capture_after_close",
+          "breaks": "INV_NoCaptureAfterClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()"
+            ],
+            "op": "void()",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; void() ; void()",
+            "length": 3
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; void()",
+            "handwritten": null,
+            "random": "advance_time(1) ; authorize(4) ; capture(4, final=False) ; increase_auth(2) ; capture(4, final=True) ; void()",
+            "random_10x": "capture(3, final=False) ; authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; void() ; void()"
+          }
+        },
+        {
+          "mutant": "M02_capture_after_expiry",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M03_unbounded_over_capture",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(5, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(5, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(5, final=True)",
+            "handwritten": "authorize(4) ; capture(5, final=True)",
+            "random": "authorize(4) ; capture(5, final=True)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+          }
+        },
+        {
+          "mutant": "M04_ceiling_off_by_one",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(5, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(5, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(5, final=True)",
+            "handwritten": "authorize(4) ; capture(5, final=True)",
+            "random": "authorize(4) ; capture(5, final=True)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+          }
+        },
+        {
+          "mutant": "M05_extra_non_final_capture",
+          "breaks": "INV_CaptureCountWithinProfile",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "capture(1, final=False)",
+              "capture(1, final=False)"
+            ],
+            "op": "capture(1, final=False)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(1, final=False) ; capture(1, final=False) ; capture(1, final=False)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; capture(1, final=False) ; capture(1, final=False)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": "authorize(4) ; capture(2, final=True) ; capture(1, final=False) ; capture(1, final=False) ; capture(1, final=False)"
+          }
+        },
+        {
+          "mutant": "M06_double_release",
+          "breaks": "INV_ReleaseAtMostOnce",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "2",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": "capture(1, final=True) ; authorize(4) ; capture(4, final=False) ; void() ; advance_time(1) ; capture(3, final=False) ; capture(0, final=True) ; capture(3, final=True) ; advance_time(1)"
+          }
+        },
+        {
+          "mutant": "M07_no_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M08_late_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M09_void_after_partial",
+          "breaks": "profile Void guard",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M10_partial_capture_keeps_hold",
+          "breaks": "INV_HoldFullyReleased",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(1, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(1, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(1, final=True)",
+            "handwritten": "authorize(4) ; capture(2, final=True)",
+            "random": "authorize(4) ; capture(1, final=True)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; capture(1, final=True)"
+          }
+        },
+        {
+          "mutant": "M11_expire_one_tick_late",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "advance_time(1)",
+              "advance_time(1)",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "observation",
+            "left": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+            "right": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+            "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "length": 5
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M12_release_before_close",
+          "breaks": "INV_NoReleaseBeforeClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "1",
+            "right": "0",
+            "script": "authorize(4) ; advance_time(1)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1)",
+            "random": "capture(5, final=True) ; capture(2, final=True) ; capture(0, final=True) ; increase_auth(2) ; authorize(4) ; advance_time(1)",
+            "random_10x": "capture(4, final=False) ; authorize(4) ; advance_time(1)"
+          }
+        }
+      ],
+      "killable_mutants": 10,
+      "equivalent_mutants": 2,
+      "detection_rate": {
+        "model": 1.0,
+        "handwritten": 0.6,
+        "random": 0.5,
+        "random_10x": 0.7
+      },
+      "seconds": 3.7
+    },
+    {
+      "profile": "incremental_auth",
+      "provider": "synthetic",
+      "suites": {
+        "model": {
+          "tests": 553,
+          "api_calls": 82506,
+          "negative_checks": true
+        },
+        "handwritten": {
+          "tests": 10,
+          "api_calls": 28,
+          "negative_checks": false
+        },
+        "random": {
+          "tests": 668,
+          "api_calls": 82549,
+          "negative_checks": true
+        },
+        "random_10x": {
+          "tests": 6751,
+          "api_calls": 825062,
+          "negative_checks": true
+        }
+      },
+      "reference_self_check": {
+        "model": {
+          "sut": "reference",
+          "profile": "incremental_auth",
+          "suite": "model",
+          "tests": 553,
+          "api_calls": 82506,
+          "passed": 553,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "handwritten": {
+          "sut": "reference",
+          "profile": "incremental_auth",
+          "suite": "handwritten",
+          "tests": 10,
+          "api_calls": 28,
+          "passed": 10,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random": {
+          "sut": "reference",
+          "profile": "incremental_auth",
+          "suite": "random",
+          "tests": 668,
+          "api_calls": 82549,
+          "passed": 668,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        },
+        "random_10x": {
+          "sut": "reference",
+          "profile": "incremental_auth",
+          "suite": "random_10x",
+          "tests": 6751,
+          "api_calls": 825062,
+          "passed": 6751,
+          "failed": 0,
+          "detected": false,
+          "violations": [],
+          "violation_count": 0
+        }
+      },
+      "mutants": [
+        {
+          "mutant": "M01_capture_after_close",
+          "breaks": "INV_NoCaptureAfterClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()"
+            ],
+            "op": "void()",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; void() ; void()",
+            "length": 3
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; void()",
+            "handwritten": "authorize(4) ; capture(1, final=True) ; capture(1, final=True)",
+            "random": "capture(6, final=True) ; increase_auth(4) ; increase_auth(6) ; authorize(4) ; increase_auth(4) ; capture(5, final=True) ; capture(1, final=True) ; void()",
+            "random_10x": "authorize(4) ; increase_auth(6) ; advance_time(1) ; capture(3, final=True) ; void()"
+          }
+        },
+        {
+          "mutant": "M02_capture_after_expiry",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M03_unbounded_over_capture",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(5, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(5, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(5, final=True)",
+            "handwritten": "authorize(4) ; capture(5, final=True)",
+            "random": "authorize(4) ; capture(5, final=True)",
+            "random_10x": "increase_auth(2) ; increase_auth(6) ; capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+          }
+        },
+        {
+          "mutant": "M04_ceiling_off_by_one",
+          "breaks": "INV_CaptureWithinLimit",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(5, final=True)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(5, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; capture(5, final=True)",
+            "handwritten": "authorize(4) ; capture(5, final=True)",
+            "random": "authorize(4) ; capture(5, final=True)",
+            "random_10x": "increase_auth(2) ; increase_auth(6) ; capture(4, final=False) ; authorize(4) ; capture(5, final=True)"
+          }
+        },
+        {
+          "mutant": "M05_extra_non_final_capture",
+          "breaks": "INV_CaptureCountWithinProfile",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "capture(1, final=False)"
+            ],
+            "op": "capture(1, final=False)",
+            "field": "accepted",
+            "left": "accepted",
+            "right": "rejected",
+            "script": "authorize(4) ; capture(1, final=False) ; capture(1, final=False)",
+            "length": 3
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=False) ; capture(1, final=False)",
+            "handwritten": "authorize(4) ; capture(1, final=False) ; capture(1, final=False)",
+            "random": "authorize(4) ; capture(7, final=True) ; increase_auth(6) ; increase_auth(4) ; capture(7, final=False) ; capture(3, final=False) ; capture(1, final=False)",
+            "random_10x": "capture(5, final=True) ; capture(5, final=False) ; capture(2, final=False) ; increase_auth(5) ; authorize(4) ; capture(2, final=False) ; capture(1, final=False)"
+          }
+        },
+        {
+          "mutant": "M06_double_release",
+          "breaks": "INV_ReleaseAtMostOnce",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "2",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": "authorize(4) ; increase_auth(5) ; void() ; advance_time(1) ; advance_time(1)"
+          }
+        },
+        {
+          "mutant": "M07_no_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M08_late_release",
+          "breaks": "INV_BoundedRelease",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "void()",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "0",
+            "right": "1",
+            "script": "authorize(4) ; void() ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": "authorize(4) ; void() ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M09_void_after_partial",
+          "breaks": "profile Void guard",
+          "equivalent_within_bounds": true,
+          "shortest_witness": null,
+          "detected": {
+            "model": false,
+            "handwritten": false,
+            "random": false,
+            "random_10x": false
+          },
+          "first_violation": {
+            "model": null,
+            "handwritten": null,
+            "random": null,
+            "random_10x": null
+          }
+        },
+        {
+          "mutant": "M10_partial_capture_keeps_hold",
+          "breaks": "INV_HoldFullyReleased",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "capture(1, final=True)",
+            "field": "observation",
+            "left": "Observation(status='HELD', auth_amount=4, captured_total=1)",
+            "right": "Observation(status='CLOSED', auth_amount=4, captured_total=1)",
+            "script": "authorize(4) ; capture(1, final=True)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; capture(1, final=True)",
+            "handwritten": "authorize(4) ; capture(2, final=True)",
+            "random": "capture(6, final=True) ; increase_auth(4) ; increase_auth(6) ; authorize(4) ; increase_auth(4) ; capture(5, final=True) ; capture(1, final=True)",
+            "random_10x": "authorize(4) ; increase_auth(6) ; advance_time(1) ; capture(3, final=True)"
+          }
+        },
+        {
+          "mutant": "M11_expire_one_tick_late",
+          "breaks": "INV_NoCaptureAfterExpiry",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)",
+              "advance_time(1)",
+              "advance_time(1)"
+            ],
+            "op": "advance_time(1)",
+            "field": "observation",
+            "left": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+            "right": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+            "script": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "length": 4
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": false,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+            "random": null,
+            "random_10x": "authorize(4) ; advance_time(1) ; increase_auth(5) ; advance_time(1) ; capture(6, final=True) ; capture(6, final=True) ; advance_time(1)"
+          }
+        },
+        {
+          "mutant": "M12_release_before_close",
+          "breaks": "INV_NoReleaseBeforeClose",
+          "equivalent_within_bounds": false,
+          "shortest_witness": {
+            "sequence": [
+              "authorize(4)"
+            ],
+            "op": "advance_time(1)",
+            "field": "released",
+            "left": "1",
+            "right": "0",
+            "script": "authorize(4) ; advance_time(1)",
+            "length": 2
+          },
+          "detected": {
+            "model": true,
+            "handwritten": true,
+            "random": true,
+            "random_10x": true
+          },
+          "first_violation": {
+            "model": "authorize(4) ; advance_time(1)",
+            "handwritten": "authorize(4) ; advance_time(1)",
+            "random": "increase_auth(2) ; authorize(4) ; advance_time(1)",
+            "random_10x": "authorize(4) ; increase_auth(6) ; advance_time(1)"
+          }
+        }
+      ],
+      "killable_mutants": 10,
+      "equivalent_mutants": 2,
+      "detection_rate": {
+        "model": 1.0,
+        "handwritten": 0.8,
+        "random": 0.6,
+        "random_10x": 0.8
+      },
+      "seconds": 12.2
+    }
+  ],
+  "overall": {
+    "model": {
+      "detected": 61,
+      "killable": 61,
+      "rate": 1.0
+    },
+    "random": {
+      "detected": 34,
+      "killable": 61,
+      "rate": 0.5573770491803278
+    },
+    "random_10x": {
+      "detected": 41,
+      "killable": 61,
+      "rate": 0.6721311475409836
+    },
+    "handwritten": {
+      "detected": 42,
+      "killable": 61,
+      "rate": 0.6885245901639344
+    }
+  }
+}

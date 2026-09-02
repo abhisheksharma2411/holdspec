@@ -1,0 +1,1528 @@
+{
+  "highlighted_pairs": [
+    {
+      "left": "stripe_card_default",
+      "right": "adyen_card_default",
+      "left_provider": "Stripe",
+      "right_provider": "Adyen",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "validity": {
+          "stripe_card_default": 3,
+          "adyen_card_default": 4
+        },
+        "documented_validity_days": {
+          "stripe_card_default": 7.0,
+          "adyen_card_default": 10.0
+        }
+      },
+      "divergence_classes": 1,
+      "divergent_sequences": 4,
+      "shortest_witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+      "divergences": [
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "CLOSED",
+              "right": "HELD"
+            }
+          ],
+          "left": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 4
+        }
+      ]
+    },
+    {
+      "left": "stripe_multicapture",
+      "right": "adyen_multiple_partial_captures",
+      "left_provider": "Stripe",
+      "right_provider": "Adyen",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "void_after_partial": {
+          "stripe_multicapture": false,
+          "adyen_multiple_partial_captures": true
+        },
+        "validity": {
+          "stripe_multicapture": 3,
+          "adyen_multiple_partial_captures": 4
+        },
+        "documented_validity_days": {
+          "stripe_multicapture": 7.0,
+          "adyen_multiple_partial_captures": 10.0
+        },
+        "documented_max_captures": {
+          "stripe_multicapture": 51,
+          "adyen_multiple_partial_captures": -1
+        },
+        "remainder_release_mechanism": {
+          "stripe_multicapture": "zero-amount capture with final_capture=true",
+          "adyen_multiple_partial_captures": "explicit cancel of the remaining amount"
+        }
+      },
+      "divergence_classes": 4,
+      "divergent_sequences": 502,
+      "shortest_witness": "authorize(4) ; capture(1, final=True)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(1, final=True)",
+          "witness_length": 2,
+          "instances": 248
+        },
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(4, final=False)",
+          "witness_length": 2,
+          "instances": 81
+        },
+        {
+          "field": "accepted",
+          "op_kind": "void",
+          "op_final": true,
+          "amounts": [
+            0
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=False) ; void()",
+          "witness_length": 3,
+          "instances": 119
+        },
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "CLOSED",
+              "right": "HELD"
+            }
+          ],
+          "left": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 54
+        }
+      ]
+    },
+    {
+      "left": "stripe_overcapture",
+      "right": "adyen_card_default",
+      "left_provider": "Stripe",
+      "right_provider": "Adyen",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "over_capture_allowance": {
+          "stripe_overcapture": 1,
+          "adyen_card_default": 0
+        },
+        "validity": {
+          "stripe_overcapture": 3,
+          "adyen_card_default": 4
+        },
+        "documented_validity_days": {
+          "stripe_overcapture": 7.0,
+          "adyen_card_default": 10.0
+        },
+        "documented_over_capture_pct": {
+          "stripe_overcapture": 15.0,
+          "adyen_card_default": 0.0
+        }
+      },
+      "divergence_classes": 2,
+      "divergent_sequences": 22,
+      "shortest_witness": "authorize(4) ; capture(5, final=True)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            5
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(5, final=True)",
+          "witness_length": 2,
+          "instances": 18
+        },
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "CLOSED",
+              "right": "HELD"
+            }
+          ],
+          "left": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 4
+        }
+      ]
+    }
+  ],
+  "all_pairs": [
+    {
+      "left": "stripe_card_default",
+      "right": "stripe_multicapture",
+      "left_provider": "Stripe",
+      "right_provider": "Stripe",
+      "shared_horizon": 5,
+      "profile_field_deltas": {
+        "max_non_final_captures": {
+          "stripe_card_default": 0,
+          "stripe_multicapture": 2
+        },
+        "documented_max_captures": {
+          "stripe_card_default": 1,
+          "stripe_multicapture": 51
+        },
+        "remainder_release_mechanism": {
+          "stripe_card_default": "automatic on partial capture",
+          "stripe_multicapture": "zero-amount capture with final_capture=true"
+        }
+      },
+      "divergence_classes": 1,
+      "divergent_sequences": 60,
+      "shortest_witness": "authorize(4) ; capture(1, final=False)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=False)",
+          "witness_length": 2,
+          "instances": 60
+        }
+      ]
+    },
+    {
+      "left": "stripe_card_default",
+      "right": "stripe_overcapture",
+      "left_provider": "Stripe",
+      "right_provider": "Stripe",
+      "shared_horizon": 5,
+      "profile_field_deltas": {
+        "over_capture_allowance": {
+          "stripe_card_default": 0,
+          "stripe_overcapture": 1
+        },
+        "documented_over_capture_pct": {
+          "stripe_card_default": 0.0,
+          "stripe_overcapture": 15.0
+        }
+      },
+      "divergence_classes": 1,
+      "divergent_sequences": 15,
+      "shortest_witness": "authorize(4) ; capture(5, final=True)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            5
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(5, final=True)",
+          "witness_length": 2,
+          "instances": 15
+        }
+      ]
+    },
+    {
+      "left": "stripe_card_default",
+      "right": "adyen_card_default",
+      "left_provider": "Stripe",
+      "right_provider": "Adyen",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "validity": {
+          "stripe_card_default": 3,
+          "adyen_card_default": 4
+        },
+        "documented_validity_days": {
+          "stripe_card_default": 7.0,
+          "adyen_card_default": 10.0
+        }
+      },
+      "divergence_classes": 1,
+      "divergent_sequences": 4,
+      "shortest_witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+      "divergences": [
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "CLOSED",
+              "right": "HELD"
+            }
+          ],
+          "left": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 4
+        }
+      ]
+    },
+    {
+      "left": "stripe_card_default",
+      "right": "adyen_multiple_partial_captures",
+      "left_provider": "Stripe",
+      "right_provider": "Adyen",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "max_non_final_captures": {
+          "stripe_card_default": 0,
+          "adyen_multiple_partial_captures": 2
+        },
+        "void_after_partial": {
+          "stripe_card_default": false,
+          "adyen_multiple_partial_captures": true
+        },
+        "validity": {
+          "stripe_card_default": 3,
+          "adyen_multiple_partial_captures": 4
+        },
+        "documented_validity_days": {
+          "stripe_card_default": 7.0,
+          "adyen_multiple_partial_captures": 10.0
+        },
+        "documented_max_captures": {
+          "stripe_card_default": 1,
+          "adyen_multiple_partial_captures": -1
+        },
+        "remainder_release_mechanism": {
+          "stripe_card_default": "automatic on partial capture",
+          "adyen_multiple_partial_captures": "explicit cancel of the remaining amount"
+        }
+      },
+      "divergence_classes": 3,
+      "divergent_sequences": 112,
+      "shortest_witness": "authorize(4) ; capture(1, final=True)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            1,
+            2,
+            3
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(1, final=True)",
+          "witness_length": 2,
+          "instances": 54
+        },
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=False)",
+          "witness_length": 2,
+          "instances": 54
+        },
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "CLOSED",
+              "right": "HELD"
+            }
+          ],
+          "left": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 4
+        }
+      ]
+    },
+    {
+      "left": "stripe_card_default",
+      "right": "incremental_auth",
+      "left_provider": "Stripe",
+      "right_provider": "synthetic",
+      "shared_horizon": 5,
+      "profile_field_deltas": {
+        "max_non_final_captures": {
+          "stripe_card_default": 0,
+          "incremental_auth": 1
+        },
+        "supports_incremental_auth": {
+          "stripe_card_default": false,
+          "incremental_auth": true
+        },
+        "void_after_partial": {
+          "stripe_card_default": false,
+          "incremental_auth": true
+        },
+        "documented_max_captures": {
+          "stripe_card_default": 1,
+          "incremental_auth": 2
+        },
+        "remainder_release_mechanism": {
+          "stripe_card_default": "automatic on partial capture",
+          "incremental_auth": "explicit cancel of the remaining amount"
+        }
+      },
+      "divergence_classes": 2,
+      "divergent_sequences": 90,
+      "shortest_witness": "authorize(4) ; capture(1, final=False)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=False)",
+          "witness_length": 2,
+          "instances": 60
+        },
+        {
+          "field": "accepted",
+          "op_kind": "increase_auth",
+          "op_final": true,
+          "amounts": [
+            1,
+            2
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; increase_auth(1)",
+          "witness_length": 2,
+          "instances": 30
+        }
+      ]
+    },
+    {
+      "left": "stripe_multicapture",
+      "right": "stripe_overcapture",
+      "left_provider": "Stripe",
+      "right_provider": "Stripe",
+      "shared_horizon": 5,
+      "profile_field_deltas": {
+        "over_capture_allowance": {
+          "stripe_multicapture": 0,
+          "stripe_overcapture": 1
+        },
+        "max_non_final_captures": {
+          "stripe_multicapture": 2,
+          "stripe_overcapture": 0
+        },
+        "documented_over_capture_pct": {
+          "stripe_multicapture": 0.0,
+          "stripe_overcapture": 15.0
+        },
+        "documented_max_captures": {
+          "stripe_multicapture": 51,
+          "stripe_overcapture": 1
+        },
+        "remainder_release_mechanism": {
+          "stripe_multicapture": "zero-amount capture with final_capture=true",
+          "stripe_overcapture": "automatic on partial capture"
+        }
+      },
+      "divergence_classes": 2,
+      "divergent_sequences": 75,
+      "shortest_witness": "authorize(4) ; capture(1, final=False)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(1, final=False)",
+          "witness_length": 2,
+          "instances": 60
+        },
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            5
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(5, final=True)",
+          "witness_length": 2,
+          "instances": 15
+        }
+      ]
+    },
+    {
+      "left": "stripe_multicapture",
+      "right": "adyen_card_default",
+      "left_provider": "Stripe",
+      "right_provider": "Adyen",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "max_non_final_captures": {
+          "stripe_multicapture": 2,
+          "adyen_card_default": 0
+        },
+        "validity": {
+          "stripe_multicapture": 3,
+          "adyen_card_default": 4
+        },
+        "documented_validity_days": {
+          "stripe_multicapture": 7.0,
+          "adyen_card_default": 10.0
+        },
+        "documented_max_captures": {
+          "stripe_multicapture": 51,
+          "adyen_card_default": 1
+        },
+        "remainder_release_mechanism": {
+          "stripe_multicapture": "zero-amount capture with final_capture=true",
+          "adyen_card_default": "automatic on partial capture"
+        }
+      },
+      "divergence_classes": 2,
+      "divergent_sequences": 76,
+      "shortest_witness": "authorize(4) ; capture(1, final=False)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(1, final=False)",
+          "witness_length": 2,
+          "instances": 72
+        },
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "CLOSED",
+              "right": "HELD"
+            }
+          ],
+          "left": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 4
+        }
+      ]
+    },
+    {
+      "left": "stripe_multicapture",
+      "right": "adyen_multiple_partial_captures",
+      "left_provider": "Stripe",
+      "right_provider": "Adyen",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "void_after_partial": {
+          "stripe_multicapture": false,
+          "adyen_multiple_partial_captures": true
+        },
+        "validity": {
+          "stripe_multicapture": 3,
+          "adyen_multiple_partial_captures": 4
+        },
+        "documented_validity_days": {
+          "stripe_multicapture": 7.0,
+          "adyen_multiple_partial_captures": 10.0
+        },
+        "documented_max_captures": {
+          "stripe_multicapture": 51,
+          "adyen_multiple_partial_captures": -1
+        },
+        "remainder_release_mechanism": {
+          "stripe_multicapture": "zero-amount capture with final_capture=true",
+          "adyen_multiple_partial_captures": "explicit cancel of the remaining amount"
+        }
+      },
+      "divergence_classes": 4,
+      "divergent_sequences": 502,
+      "shortest_witness": "authorize(4) ; capture(1, final=True)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(1, final=True)",
+          "witness_length": 2,
+          "instances": 248
+        },
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(4, final=False)",
+          "witness_length": 2,
+          "instances": 81
+        },
+        {
+          "field": "accepted",
+          "op_kind": "void",
+          "op_final": true,
+          "amounts": [
+            0
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=False) ; void()",
+          "witness_length": 3,
+          "instances": 119
+        },
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "CLOSED",
+              "right": "HELD"
+            }
+          ],
+          "left": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 54
+        }
+      ]
+    },
+    {
+      "left": "stripe_multicapture",
+      "right": "incremental_auth",
+      "left_provider": "Stripe",
+      "right_provider": "synthetic",
+      "shared_horizon": 5,
+      "profile_field_deltas": {
+        "max_non_final_captures": {
+          "stripe_multicapture": 2,
+          "incremental_auth": 1
+        },
+        "supports_incremental_auth": {
+          "stripe_multicapture": false,
+          "incremental_auth": true
+        },
+        "void_after_partial": {
+          "stripe_multicapture": false,
+          "incremental_auth": true
+        },
+        "documented_max_captures": {
+          "stripe_multicapture": 51,
+          "incremental_auth": 2
+        },
+        "remainder_release_mechanism": {
+          "stripe_multicapture": "zero-amount capture with final_capture=true",
+          "incremental_auth": "explicit cancel of the remaining amount"
+        }
+      },
+      "divergence_classes": 3,
+      "divergent_sequences": 504,
+      "shortest_witness": "authorize(4) ; increase_auth(1)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "increase_auth",
+          "op_final": true,
+          "amounts": [
+            1,
+            2
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; increase_auth(1)",
+          "witness_length": 2,
+          "instances": 240
+        },
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(1, final=False) ; capture(1, final=False)",
+          "witness_length": 3,
+          "instances": 159
+        },
+        {
+          "field": "accepted",
+          "op_kind": "void",
+          "op_final": true,
+          "amounts": [
+            0
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=False) ; void()",
+          "witness_length": 3,
+          "instances": 105
+        }
+      ]
+    },
+    {
+      "left": "stripe_overcapture",
+      "right": "adyen_card_default",
+      "left_provider": "Stripe",
+      "right_provider": "Adyen",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "over_capture_allowance": {
+          "stripe_overcapture": 1,
+          "adyen_card_default": 0
+        },
+        "validity": {
+          "stripe_overcapture": 3,
+          "adyen_card_default": 4
+        },
+        "documented_validity_days": {
+          "stripe_overcapture": 7.0,
+          "adyen_card_default": 10.0
+        },
+        "documented_over_capture_pct": {
+          "stripe_overcapture": 15.0,
+          "adyen_card_default": 0.0
+        }
+      },
+      "divergence_classes": 2,
+      "divergent_sequences": 22,
+      "shortest_witness": "authorize(4) ; capture(5, final=True)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            5
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(5, final=True)",
+          "witness_length": 2,
+          "instances": 18
+        },
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "CLOSED",
+              "right": "HELD"
+            }
+          ],
+          "left": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 4
+        }
+      ]
+    },
+    {
+      "left": "stripe_overcapture",
+      "right": "adyen_multiple_partial_captures",
+      "left_provider": "Stripe",
+      "right_provider": "Adyen",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "over_capture_allowance": {
+          "stripe_overcapture": 1,
+          "adyen_multiple_partial_captures": 0
+        },
+        "max_non_final_captures": {
+          "stripe_overcapture": 0,
+          "adyen_multiple_partial_captures": 2
+        },
+        "void_after_partial": {
+          "stripe_overcapture": false,
+          "adyen_multiple_partial_captures": true
+        },
+        "validity": {
+          "stripe_overcapture": 3,
+          "adyen_multiple_partial_captures": 4
+        },
+        "documented_validity_days": {
+          "stripe_overcapture": 7.0,
+          "adyen_multiple_partial_captures": 10.0
+        },
+        "documented_over_capture_pct": {
+          "stripe_overcapture": 15.0,
+          "adyen_multiple_partial_captures": 0.0
+        },
+        "documented_max_captures": {
+          "stripe_overcapture": 1,
+          "adyen_multiple_partial_captures": -1
+        },
+        "remainder_release_mechanism": {
+          "stripe_overcapture": "automatic on partial capture",
+          "adyen_multiple_partial_captures": "explicit cancel of the remaining amount"
+        }
+      },
+      "divergence_classes": 3,
+      "divergent_sequences": 130,
+      "shortest_witness": "authorize(4) ; capture(1, final=True)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            1,
+            2,
+            3,
+            5
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(1, final=True)",
+          "witness_length": 2,
+          "instances": 72
+        },
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=False)",
+          "witness_length": 2,
+          "instances": 54
+        },
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "CLOSED",
+              "right": "HELD"
+            }
+          ],
+          "left": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 4
+        }
+      ]
+    },
+    {
+      "left": "stripe_overcapture",
+      "right": "incremental_auth",
+      "left_provider": "Stripe",
+      "right_provider": "synthetic",
+      "shared_horizon": 5,
+      "profile_field_deltas": {
+        "over_capture_allowance": {
+          "stripe_overcapture": 1,
+          "incremental_auth": 0
+        },
+        "max_non_final_captures": {
+          "stripe_overcapture": 0,
+          "incremental_auth": 1
+        },
+        "supports_incremental_auth": {
+          "stripe_overcapture": false,
+          "incremental_auth": true
+        },
+        "void_after_partial": {
+          "stripe_overcapture": false,
+          "incremental_auth": true
+        },
+        "documented_over_capture_pct": {
+          "stripe_overcapture": 15.0,
+          "incremental_auth": 0.0
+        },
+        "documented_max_captures": {
+          "stripe_overcapture": 1,
+          "incremental_auth": 2
+        },
+        "remainder_release_mechanism": {
+          "stripe_overcapture": "automatic on partial capture",
+          "incremental_auth": "explicit cancel of the remaining amount"
+        }
+      },
+      "divergence_classes": 3,
+      "divergent_sequences": 105,
+      "shortest_witness": "authorize(4) ; capture(1, final=False)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=False)",
+          "witness_length": 2,
+          "instances": 60
+        },
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            5
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(5, final=True)",
+          "witness_length": 2,
+          "instances": 15
+        },
+        {
+          "field": "accepted",
+          "op_kind": "increase_auth",
+          "op_final": true,
+          "amounts": [
+            1,
+            2
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; increase_auth(1)",
+          "witness_length": 2,
+          "instances": 30
+        }
+      ]
+    },
+    {
+      "left": "adyen_card_default",
+      "right": "adyen_multiple_partial_captures",
+      "left_provider": "Adyen",
+      "right_provider": "Adyen",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "max_non_final_captures": {
+          "adyen_card_default": 0,
+          "adyen_multiple_partial_captures": 2
+        },
+        "void_after_partial": {
+          "adyen_card_default": false,
+          "adyen_multiple_partial_captures": true
+        },
+        "documented_max_captures": {
+          "adyen_card_default": 1,
+          "adyen_multiple_partial_captures": -1
+        },
+        "remainder_release_mechanism": {
+          "adyen_card_default": "automatic on partial capture",
+          "adyen_multiple_partial_captures": "explicit cancel of the remaining amount"
+        }
+      },
+      "divergence_classes": 2,
+      "divergent_sequences": 132,
+      "shortest_witness": "authorize(4) ; capture(1, final=True)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            1,
+            2,
+            3
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(1, final=True)",
+          "witness_length": 2,
+          "instances": 66
+        },
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=False)",
+          "witness_length": 2,
+          "instances": 66
+        }
+      ]
+    },
+    {
+      "left": "adyen_card_default",
+      "right": "incremental_auth",
+      "left_provider": "Adyen",
+      "right_provider": "synthetic",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "max_non_final_captures": {
+          "adyen_card_default": 0,
+          "incremental_auth": 1
+        },
+        "supports_incremental_auth": {
+          "adyen_card_default": false,
+          "incremental_auth": true
+        },
+        "void_after_partial": {
+          "adyen_card_default": false,
+          "incremental_auth": true
+        },
+        "validity": {
+          "adyen_card_default": 4,
+          "incremental_auth": 3
+        },
+        "documented_validity_days": {
+          "adyen_card_default": 10.0,
+          "incremental_auth": 7.0
+        },
+        "documented_max_captures": {
+          "adyen_card_default": 1,
+          "incremental_auth": 2
+        },
+        "remainder_release_mechanism": {
+          "adyen_card_default": "automatic on partial capture",
+          "incremental_auth": "explicit cancel of the remaining amount"
+        }
+      },
+      "divergence_classes": 3,
+      "divergent_sequences": 112,
+      "shortest_witness": "authorize(4) ; capture(1, final=False)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=False)",
+          "witness_length": 2,
+          "instances": 72
+        },
+        {
+          "field": "accepted",
+          "op_kind": "increase_auth",
+          "op_final": true,
+          "amounts": [
+            1,
+            2
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; increase_auth(1)",
+          "witness_length": 2,
+          "instances": 36
+        },
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "HELD",
+              "right": "CLOSED"
+            }
+          ],
+          "left": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 4
+        }
+      ]
+    },
+    {
+      "left": "adyen_multiple_partial_captures",
+      "right": "incremental_auth",
+      "left_provider": "Adyen",
+      "right_provider": "synthetic",
+      "shared_horizon": 6,
+      "profile_field_deltas": {
+        "max_non_final_captures": {
+          "adyen_multiple_partial_captures": 2,
+          "incremental_auth": 1
+        },
+        "supports_incremental_auth": {
+          "adyen_multiple_partial_captures": false,
+          "incremental_auth": true
+        },
+        "validity": {
+          "adyen_multiple_partial_captures": 4,
+          "incremental_auth": 3
+        },
+        "documented_validity_days": {
+          "adyen_multiple_partial_captures": 10.0,
+          "incremental_auth": 7.0
+        },
+        "documented_max_captures": {
+          "adyen_multiple_partial_captures": -1,
+          "incremental_auth": 2
+        }
+      },
+      "divergence_classes": 5,
+      "divergent_sequences": 501,
+      "shortest_witness": "authorize(4) ; capture(1, final=True)",
+      "divergences": [
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": true,
+          "amounts": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(1, final=True)",
+          "witness_length": 2,
+          "instances": 194
+        },
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            4
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; capture(4, final=False)",
+          "witness_length": 2,
+          "instances": 15
+        },
+        {
+          "field": "accepted",
+          "op_kind": "increase_auth",
+          "op_final": true,
+          "amounts": [
+            1,
+            2
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "rejected",
+              "right": "accepted"
+            }
+          ],
+          "left": "rejected",
+          "right": "accepted",
+          "witness": "authorize(4) ; increase_auth(1)",
+          "witness_length": 2,
+          "instances": 178
+        },
+        {
+          "field": "accepted",
+          "op_kind": "capture",
+          "op_final": false,
+          "amounts": [
+            1,
+            2
+          ],
+          "differing": [
+            {
+              "attribute": "accepted",
+              "left": "accepted",
+              "right": "rejected"
+            }
+          ],
+          "left": "accepted",
+          "right": "rejected",
+          "witness": "authorize(4) ; capture(1, final=False) ; capture(1, final=False)",
+          "witness_length": 3,
+          "instances": 75
+        },
+        {
+          "field": "observation",
+          "op_kind": "advance_time",
+          "op_final": true,
+          "amounts": [
+            1
+          ],
+          "differing": [
+            {
+              "attribute": "status",
+              "left": "HELD",
+              "right": "CLOSED"
+            }
+          ],
+          "left": "Observation(status='HELD', auth_amount=4, captured_total=0)",
+          "right": "Observation(status='CLOSED', auth_amount=4, captured_total=0)",
+          "witness": "authorize(4) ; advance_time(1) ; advance_time(1) ; advance_time(1)",
+          "witness_length": 4,
+          "instances": 39
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+# The model, the spec harness and the conformance suite use only the standard
+# library. These are for the test runner, the figures, and the optional
+# Postgres-backed run log.
+#
+# Lower bounds rather than exact pins: the versions below are the ones the
+# results were produced with, and anything newer works. Pinning exactly would
+# make `make setup` fail on Python versions whose wheels postdate the pin.
+pytest>=8.3,<10
+matplotlib>=3.9,<4
+psycopg[binary]>=3.2,<4

@@ -1,0 +1,16 @@
+\begin{tabular}{llllr}
+\toprule
+& Change made to the specification & Property targeted & Caught & Trace \\
+\midrule
+S01 & a final capture no longer checks the authorization deadline & \texttt{NoCaptureAfterExpiry} & yes & 7 \\
+S02 & a final capture no longer checks the profile's capture ceiling & \texttt{CaptureWithinLimit} & yes & 5 \\
+S03 & the hold may be released again after it has already been released & \texttt{ReleaseAtMostOnce} & yes & 7 \\
+S04 & held funds may be released before the hold closes & \texttt{NoReleaseBeforeClose} & yes & 5 \\
+S05 & time may pass while a release is overdue & \texttt{BoundedRelease} & yes & 7 \\
+S06 & the non-final capture budget is not enforced & \texttt{CaptureCountWithinProfile} & yes & 6 \\
+S07 & closing a hold does not record what had been captured & \texttt{NoCaptureAfterClose} & yes & 3 \\
+S08 & nothing obliges the provider to ever release the funds & \texttt{EventualRelease} & yes & 8 \\
+S09 & nothing obliges the provider to ever expire a stale authorization & \texttt{EventualClose} & yes & 8 \\
+S10 & the hold need never be created & \texttt{Termination} & yes & 2 \\
+\bottomrule
+\end{tabular}
