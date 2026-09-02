@@ -1,31 +1,22 @@
 # Publishing this artifact
 
-No GitHub or Zenodo credentials were used while building this, so the repository
-is committed and tagged locally. Everything below is one step each.
+## 1. Push to GitHub -- done
 
-## 1. Push to GitHub
-
-```bash
-cd holdspec
-git remote add origin https://github.com/abhisheksharma2411/holdspec.git
-git push -u origin main
-git push origin v1.0.0
-```
-
-The tag `v1.0.0` already exists locally and points at the commit the paper's
-results were produced from.
+Published at <https://github.com/abhisheksharma2411/holdspec>, public, with the
+`v1.0.0` release cut from the tag that points at the commit the paper's results
+were produced from: <https://github.com/abhisheksharma2411/holdspec/releases/tag/v1.0.0>
 
 ## 2. Mint a DOI for the code on Zenodo
 
 1. Sign in at <https://zenodo.org> with the GitHub account.
 2. Under *Settings -> GitHub*, switch the toggle on for `abhisheksharma2411/holdspec`.
-3. Re-publish the release: `gh release create v1.0.0 --title "HoldSpec 1.0.0" --notes-file RELEASE_NOTES.md`
-   (or press *Draft a new release* in the GitHub UI and select the existing tag).
-   Zenodo archives the tag and mints the DOI automatically.
-4. Copy the DOI into two places, then rebuild the paper:
-   - `paper/holdspec.tex`, in the Artifact Availability section, replacing
-     `\zenodocode`
-   - `CITATION.cff`, as a `doi:` field
+3. The `v1.0.0` release already exists but predates the toggle, so Zenodo has not
+   seen it. Cut a `v1.0.1` release (or delete and re-create `v1.0.0` from the
+   GitHub UI) to trigger the archive. Zenodo mints the DOI automatically.
+4. Put the DOI in `paper/zenodo_doi.txt` (one line, no other content) and add it
+   to `CITATION.cff` as a `doi:` field, then run `make paper`. The LaTeX reads
+   the DOI from that file through a generated macro, so the `.tex` never needs
+   hand-editing.
 
 ## 3. There is no separate dataset deposit
 
@@ -35,7 +26,7 @@ and a verbatim quote per field; every workload is generated from the model at ru
 time. A dataset DOI would point at nothing that is not already in the code
 deposit, so only one DOI is minted.
 
-## 4. Checks before pushing
+## 4. Checks before any further push
 
 ```bash
 make reproduce          # clean tree through to the PDF
