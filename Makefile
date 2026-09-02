@@ -6,6 +6,7 @@
 #   make experiments  run E1-E6 and write results/
 #   make figures      regenerate figures from results/
 #   make paper        build paper/holdspec.pdf
+#   make arxiv        build and verify a self-contained arXiv submission
 #   make reproduce    all of the above, from a clean tree
 
 PY       := .venv/bin/python
@@ -13,7 +14,7 @@ PIP      := .venv/bin/pip
 TLA_JAR  := tools/tla2tools.jar
 TLA_URL  := https://github.com/tlaplus/tlaplus/releases/latest/download/tla2tools.jar
 
-.PHONY: setup check test experiments figures paper reproduce clean data services
+.PHONY: setup check test experiments figures paper arxiv reproduce clean data services
 
 setup: $(PY) $(TLA_JAR)
 
@@ -54,6 +55,13 @@ paper: setup
 	$(PY) paper/make_tables.py
 	cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error holdspec.tex
 
+# arXiv wants one flat tree that builds on its own: no parent-directory paths,
+# and the .bbl carried along because arXiv does not run BibTeX. This flattens
+# the layout and then compiles it in a scratch directory holding nothing else,
+# which is the closest local stand-in for arXiv's own build.
+arxiv: paper
+	$(PY) paper/make_arxiv.py
+
 # Optional: Postgres for the run log plus a mock PSP per API shape. The
 # experiments run without this; they fall back to SQLite and subprocesses.
 services:
@@ -68,4 +76,5 @@ clean:
 	       spec/states spec/profiles/*.cfg spec/HoldSpecS*.tla \
 	       figures/*.pdf figures/*.png paper/tables/*.tex \
 	       paper/*.aux paper/*.log paper/*.out paper/*.fls paper/*.fdb_latexmk \
-	       paper/*.bbl paper/*.blg paper/holdspec.pdf
+	       paper/*.bbl paper/*.blg paper/holdspec.pdf \
+	       paper/arxiv paper/holdspec-arxiv.tar.gz
