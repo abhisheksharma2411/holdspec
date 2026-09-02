@@ -28,6 +28,12 @@ TARBALL = PAPER / "holdspec-arxiv.tar.gz"
 
 FIGURES = ["fig1_state_space.pdf", "fig2_detection.pdf", "fig3_divergence.pdf"]
 
+# arXiv's abstract box takes plain text, not LaTeX, and the paper's abstract is
+# full of generated macros. Writing it out with the macros resolved means the
+# number in the abstract box is the number the experiments produced, rather than
+# one retyped by hand at submission time.
+ABSTRACT_TXT = PAPER / "arxiv_abstract.txt"
+
 
 def build() -> Path:
     if OUT.exists():
@@ -51,10 +57,26 @@ def build() -> Path:
         raise SystemExit("holdspec.bbl is missing; run `make paper` first")
     shutil.copy2(bbl, OUT / "holdspec.bbl")
 
+    write_plain_abstract(tex)
+
     with tarfile.open(TARBALL, "w:gz") as tar:
         for f in sorted(OUT.iterdir()):
             tar.add(f, arcname=f.name)
     return TARBALL
+
+
+def write_plain_abstract(tex: str) -> None:
+    macros = dict(re.findall(r"\\newcommand\{\\(\w+)\}\{([^}]*)\}",
+                             (PAPER / "tables" / "macros.tex").read_text()))
+    body = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", tex, re.S).group(1)
+    for name, value in macros.items():
+        body = body.replace("\\" + name + "{}", value).replace("\\" + name, value)
+    body = body.replace("\\%", "%").replace("---", "--")
+    body = body.replace("``", '"').replace("''", '"')
+    body = re.sub(r"\\(?:code|emph|textbf|textit)\{([^}]*)\}", r"\1", body)
+    body = re.sub(r"\s+", " ", body).strip()
+    ABSTRACT_TXT.write_text(body + "\n")
+    print(f"  arxiv_abstract.txt ({len(body)} chars, arXiv allows 1920)")
 
 
 def verify() -> bool:
