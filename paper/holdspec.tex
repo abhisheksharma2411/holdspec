@@ -40,8 +40,8 @@ abhicse24@gmail.com\quad\textbar\quad github.com/abhisheksharma2411\quad\textbar
 When a merchant authorizes a card and captures the funds later, the money sits
 in a state that neither party fully controls: held on the cardholder's account,
 not yet taken, and due to lapse on a deadline set by the card network. What a
-merchant may do to that hold --- capture part of it, capture again, void it,
-raise it, let it expire --- is business logic that every payment service provider
+merchant may do to that hold, capture part of it, capture again, void it,
+raise it, let it expire, is business logic that every payment service provider
 implements slightly differently and none of them specifies formally. We give the
 lifecycle a state machine in TLA+, parameterized by a provider capability
 profile, and check eight safety invariants and three liveness properties over
@@ -55,7 +55,7 @@ distinguishable from a correct implementation, the generated suite detects
 random sequences given ten times the budget still reach only
 \randomtenxrate{}\%. Running the same suite between two providers turns the
 comparison into a search, and it returns short executable witnesses for
-divergences the two documentation sets imply but neither states --- including
+divergences the two documentation sets imply but neither states, including
 one that breaks the common assumption that a single adapter interface can sit
 over both, because closing a hold and releasing its remainder is a capture on
 one provider and a cancel on the other. We report what we could not do: no
@@ -160,7 +160,7 @@ Duplicate-effect prevention is the neighboring problem and a different one.
 Idempotency is about one operation submitted more than once; the hold lifecycle
 is about one authorization over its life. An implementation can be flawlessly
 idempotent and still accept a capture after a void, because the capture is not a
-retry of anything --- it is a first attempt at an operation that should no longer
+retry of anything, it is a first attempt at an operation that should no longer
 be legal. It can be correct about holds and still double-charge on a network
 retry. The two are independent, and we treat them separately: the idempotency
 contract is the subject of a companion manuscript~\cite{sharma2026idempotency},
@@ -187,7 +187,7 @@ that is left over after partially capturing a payment is automatically
 cancelled''; enabling multiple partial captures changes that, so ``[t]he
 unclaimed amount after an initial partial capture is not automatically
 cancelled''~\cite{adyen2026capture}. A capture amount ``must be the same as or,
-in case of a partial capture, less than the authorized amount'' --- no
+in case of a partial capture, less than the authorized amount'', no
 over-capture. Adyen's validity table gives 10 days for Visa card-not-present
 cardholder-initiated transactions~\cite{adyen2026adjust}, where Stripe documents
 7 days for the same brand~\cite{stripe2026hold}.
@@ -233,7 +233,7 @@ Keeping \code{ReleaseHold} separate from the actions that close a hold is what
 makes the interesting properties interesting. If closing a hold released its
 funds in the same step, ``released exactly once'' and ``released promptly'' would
 be true by construction and worth nothing. Split apart, they are claims about
-the implementation that a suite can actually test --- and, as
+the implementation that a suite can actually test, and, as
 \S\ref{sec:conformance} shows, the mutants that break them are exactly the ones a
 hand-written suite tends to miss.
 
@@ -262,7 +262,7 @@ becomes a timelock that the model checker reports.
 This was not the first design. Initially the clock advanced freely and
 \code{INV\_BoundedRelease} was left as an invariant to check. TLC's first run
 produced a four-step counterexample in which a hold closed, time simply ran on,
-and the release never became due --- correctly reporting that the specification
+and the release never became due, correctly reporting that the specification
 permitted what it was meant to forbid.
 
 \subsection{Properties}
@@ -284,8 +284,8 @@ settled end state.
 \subsection{Model checking}
 
 Table~\ref{tab:modelcheck} gives TLC's results. All eleven properties hold for
-all \numprofiles{} profiles. The state spaces are small --- the largest is
-\largeststatespace{} distinct states --- which is the point of a bounded model:
+all \numprofiles{} profiles. The state spaces are small, the largest is
+\largeststatespace{} distinct states, which is the point of a bounded model:
 exhaustive checking finishes in \checkseconds{} seconds in total, so the
 specification can be re-checked on every change to it, as
 Howard~et~al.~\cite{howard2025ccf} argue specifications should be.
@@ -325,7 +325,7 @@ conditions.
 
 Attribution needs care. TLC stops at the first property that fails, so with
 everything enabled a mutation can be reported against a property it was not
-aimed at --- both ceiling mutations trip \code{TypeOK} first, and two of the
+aimed at, both ceiling mutations trip \code{TypeOK} first, and two of the
 three fairness mutations trip \code{EventualRelease} before their own property.
 Each mutation is therefore run twice: once with all properties, and once with
 only the property it targets. Table~\ref{tab:specmutation} reports the second.
@@ -335,7 +335,7 @@ All \specmutationscaught{} are caught by the property aimed at them, and
 Two limits on what this shows. It establishes that each property has force, not
 that the set is complete: a rule we never wrote down cannot fail here. And the
 profile capability guards are not covered, because they are not safety
-properties --- weakening one makes the model describe a different provider rather
+properties, weakening one makes the model describe a different provider rather
 than an incorrect one. Measuring those is what \S\ref{sec:divergence} does.
 
 \begin{table*}[t]
@@ -350,7 +350,7 @@ enabled. Trace is the counterexample length TLC reported.}
 \section{From model to conformance suite}
 \label{sec:conformance}
 
-\subsection{Two models, kept honest}
+\subsection{Keeping the two models in step}
 
 The specification is checked by TLC, but TLC cannot generate test sequences or
 grade a running service, so the state machine is also implemented in Python. Two
@@ -364,8 +364,8 @@ immediately.
 
 \subsection{What a test may do and see}
 
-A test can call four operations --- authorize, capture (with an amount and a
-final flag), void, increase authorization --- and can let time pass. It cannot
+A test can call four operations, authorize, capture (with an amount and a
+final flag), void, increase authorization, and can let time pass. It cannot
 invoke expiry or the release of funds; those are the provider's to do, and the
 test only waits and looks.
 
@@ -396,8 +396,8 @@ Stripe PaymentIntent that was voided and one that expired uncaptured both read
 authorisation alike. Distinguishing them requires the event stream. We removed
 the field rather than grade providers on something their APIs do not answer.
 
-Both removals cost nothing measurable --- detection stayed at
-\modeldetected{}/\killablemutants{} --- but that is evidence about these
+Both removals cost nothing measurable, detection stayed at
+\modeldetected{}/\killablemutants{}, but that is evidence about these
 particular defects, not a proof that nothing needs those fields. A defect that
 voids a hold where it should have let it expire is invisible to this suite, and
 consuming the event stream is the way to reach it.
@@ -439,7 +439,7 @@ from the rates. Of 72 mutant--profile pairs, \equivmutants{} are equivalent and
 
 Two, both using the same oracle, so what is compared is the choice of call
 sequences and nothing else. \emph{Random} draws calls uniformly, with the same
-API-call budget as the generated suite --- refusal checks included, since those
+API-call budget as the generated suite, refusal checks included, since those
 cost a call too. A second random arm gets ten times that budget, to separate
 choosing the wrong calls from not making enough of them. \emph{Hand-written} is
 the suite an integration engineer writes from a provider quickstart: authorize
@@ -455,14 +455,29 @@ tests, no exhaustive refusal checking, which is the point of it.
 
 Table~\ref{tab:conformance} and Fig.~\ref{fig:detection} give the outcome. The
 generated suite detects every killable defect on every profile,
-\modeldetected{}/\killablemutants{}. Equal-budget random reaches
-\randomrate{}\%, and with ten times the budget \randomtenxrate{}\% --- so the gap
-is in which sequences are chosen, not in how many. The hand-written suite
-reaches \handrate{}\% on roughly 25 calls, which is a respectable return for its
-size and is the honest comparison: it is not a weak baseline, it is a cheap one.
+\modeldetected{}/\killablemutants{}.
+
+That figure should be read with its construction in mind. A defect counts as
+killable when some sequence within the model's bounds distinguishes it, and the
+generated suite is a breadth-first enumeration of sequences within those same
+bounds. Complete detection is close to structurally guaranteed and is not the
+interesting number; it confirms that the generator covers the space its own
+killability criterion is defined over. What the experiment does measure is how
+far the baselines fall short of that coverage under an identical call budget,
+and both are scored against the same killability criterion, so the comparison
+between them is fair.
+
+Equal-budget random reaches \randomrate{}\%, and with ten times the budget
+\randomtenxrate{}\%, so the gap is in which sequences are chosen rather than how
+many. The hand-written suite reaches \handrate{}\% on roughly 25 calls, a
+respectable return for its size: it is a cheap baseline rather than a weak one.
+With \killablemutants{} defects in the denominator, a single detection is worth
+about 1.6 percentage points, so the two-point difference between the
+hand-written suite and random at ten times the budget should not be read as an
+ordering.
 
 What the baselines miss is consistent and, in hindsight, predictable. They find
-the defects that break a common path --- an unbounded ceiling shows up the first
+the defects that break a common path, an unbounded ceiling shows up the first
 time anything captures too much. They miss the ones that need a specific state
 reached in a specific order: a capture accepted after a void needs a void first
 and a capture second, both on a hold that is otherwise fine; a late release needs
@@ -472,9 +487,9 @@ than from a list of scenarios someone thought of.
 
 \begin{table*}[t]
 \centering
-\caption{Detection of seeded defects. Equivalent mutants --- those no call
+\caption{Detection of seeded defects. Equivalent mutants, those no call
 sequence can distinguish from a correct implementation, established by
-exhaustive search --- are excluded from the rates. Random arms use the model
+exhaustive search, are excluded from the rates. Random arms use the model
 suite's call budget and ten times it.}
 \label{tab:conformance}
 \small
@@ -497,7 +512,7 @@ system under test share a language and a process. We therefore stood up mock
 providers that speak Stripe's and Adyen's own request shapes over HTTP ---
 \code{POST /v1/payment\_intents/\{id\}/capture} with
 \code{amount\_to\_capture} and \code{final\_capture} on one,
-\code{POST /payments/\{ref\}/captures} with an amount object on the other --- and
+\code{POST /payments/\{ref\}/captures} with an amount object on the other, and
 ran the identical suite through adapters.
 
 Table~\ref{tab:http} reports it. All \httpconforming{} of \httpdeployments{}
@@ -533,7 +548,7 @@ shortest prefix is kept as the witness.
 Two adjustments were needed to make the answers mean anything. Both sides get
 the larger of the two clock bounds, because otherwise the profile with the
 shorter horizon simply stops advancing and the saturation is reported as a
-behavioral difference --- before this was fixed, three of four reported
+behavioral difference, before this was fixed, three of four reported
 divergences in the Stripe/Adyen comparison were that artifact. And a class is
 identified independently of the amount, because a provider that refuses a closing
 capture refuses it at every amount, and reporting one class per amount reports
@@ -562,7 +577,7 @@ accepted on Stripe and refused on Adyen, because Adyen has no final-capture flag
 A non-final capture of the whole authorized amount is accepted on Stripe, which
 keeps the PaymentIntent open with nothing left to capture, and refused on Adyen,
 where taking everything ends the hold. A void after a partial capture is refused
-on Stripe and accepted on Adyen --- the same operation, opposite answers. And the
+on Stripe and accepted on Adyen, the same operation, opposite answers. And the
 validity difference again.
 
 \begin{table*}[t]
@@ -597,8 +612,8 @@ failure against the same provider profile.
 
 \subsection{One adapter over two rails is harder than it looks}
 
-The usual way to support several PSPs is an internal interface --- authorize,
-capture, void --- with an adapter behind each provider. The divergences above say
+The usual way to support several PSPs is an internal interface, authorize,
+capture, void, with an adapter behind each provider. The divergences above say
 what that interface costs.
 
 Closing a hold short of the full amount is a capture on Stripe and, on Adyen, not
@@ -607,8 +622,8 @@ on one and a cancel on the other. A void after a partial capture is legal on one
 and refused on the other. An adapter can hide the first two by composing calls,
 as ours does, but composition has a visible cost: what was one operation becomes
 two, and any observable that counts operations stops meaning the same thing.
-The third cannot be hidden --- the operation is simply unavailable on one rail,
-and the honest adapter refuses it locally rather than sending a request that will
+The third cannot be hidden, the operation is simply unavailable on one rail,
+and the plain adapter refuses it locally rather than sending a request that will
 be misinterpreted.
 
 The practical reading: a multi-PSP interface should be typed by capability, and
@@ -621,8 +636,8 @@ The model is small: eleven variables, eight actions, a few thousand states. Its
 value is not that it is difficult but that it is checkable, and that everything
 downstream is derived from it rather than restated alongside it. The suite is
 generated from it, the oracle is it, the provider comparison is it under two
-parameterizations. When the model was wrong --- three times, all found by running
-the suite against something that did not share its assumptions --- one edit fixed
+parameterizations. When the model was wrong, three times, all found by running
+the suite against something that did not share its assumptions, one edit fixed
 the specification, the suite, and the comparison together.
 
 \section{Limitations}
@@ -641,8 +656,8 @@ in the response, so a live run needs a notification endpoint; our adapter raises
 rather than pretending to poll.
 
 \emph{The model is bounded and small.} Four minor units, a handful of ticks, one
-hold at a time. Defects that depend on magnitude --- an overflow, a currency with
-a different minor-unit scale --- are out of reach, as are races between
+hold at a time. Defects that depend on magnitude, an overflow, a currency with
+a different minor-unit scale, are out of reach, as are races between
 concurrent operations on one authorization, which need the operation identity
 that the idempotency work supplies.
 
@@ -664,7 +679,7 @@ class nobody thought of is not in the denominator.
 protocol. Basin~et~al.~\cite{basin2021emv} built a symbolic Tamarin model of EMV
 and found two attacks on contactless transactions. That work is about
 card--terminal authentication at the point of sale; the business logic that
-governs the resulting authorization afterwards --- partial capture, void, expiry
+governs the resulting authorization afterwards, partial capture, void, expiry
 --- is outside its scope and is the subject here.
 
 \emph{TLA+ applied to payment systems} is closest in method. Grundmann and
@@ -696,7 +711,7 @@ applied to and what applying them reveals about the providers.
 \emph{Provider documentation}~\cite{stripe2026hold, stripe2026multicapture,
 stripe2026overcapture, adyen2026capture, adyen2026adjust} is careful and, within
 each provider, complete. None of it is machine-checkable, and none of it
-describes another provider --- which is precisely the gap
+describes another provider, which is precisely the gap
 \S\ref{sec:divergence} fills.
 
 \section{Conclusion}
@@ -705,14 +720,14 @@ The authorization hold is a piece of financial state that sits between two
 parties for days, governed by rules that every payment provider implements and
 none specifies formally. We gave those rules a machine-checked state machine,
 parameterized it by provider capability, and used it to generate a conformance
-suite that detects every seeded defect a call sequence can reach --- where random
+suite that detects every seeded defect a call sequence can reach, where random
 testing at ten times the budget reaches two-thirds and a hand-written suite about
 the same.
 
 The result we did not expect is how much the two providers differ under the same
 name. Every profile pair diverges. Two of the divergences make the common
 one-interface-over-many-rails design harder than it is usually treated as being,
-and one of them --- the absence of a final-capture flag --- is not a difference in
+and one of them, the absence of a final-capture flag, is not a difference in
 values but in what operations exist.
 
 The obvious next step is the one we could not take: point the suite at a live

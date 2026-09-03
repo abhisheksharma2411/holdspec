@@ -43,3 +43,9 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+    # Record which revision produced these files. Without this a reader cannot
+    # map a number in the paper back to the code that generated it.
+    from _provenance import write_provenance
+    path = write_provenance()
+    print(f"  wrote {path.name}")

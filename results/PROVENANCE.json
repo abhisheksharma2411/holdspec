@@ -1,0 +1,36 @@
+{
+ "git_commit": "798e32e370931fba72a4f80b2c30e8d5684cb042",
+ "git_dirty": "yes",
+ "python": "3.14.7",
+ "generated_at": "2026-09-03T04:41:58+00:00",
+ "files": {
+  "defect_corpus.json": {
+   "sha256_16": "137f13b69d9fa541",
+   "bytes": 95566
+  },
+  "e1_model_check.json": {
+   "sha256_16": "a98fad1c2b8f5561",
+   "bytes": 6890
+  },
+  "e2_spec_mutation.json": {
+   "sha256_16": "70b5072b2a8870dd",
+   "bytes": 4402
+  },
+  "e3_conformance.json": {
+   "sha256_16": "d1cde9b8cde5353a",
+   "bytes": 84039
+  },
+  "e4_cross_provider.json": {
+   "sha256_16": "a4202feb10d59db2",
+   "bytes": 43286
+  },
+  "e5_equivalence.json": {
+   "sha256_16": "aaafdfb908d54956",
+   "bytes": 1416
+  },
+  "e6_http_conformance.json": {
+   "sha256_16": "4151398f38aaa464",
+   "bytes": 3771
+  }
+ }
+}
