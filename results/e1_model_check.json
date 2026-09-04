@@ -3,7 +3,7 @@
     {
       "profile": "stripe_card_default",
       "module": "HoldSpec",
-      "config": "/Users/Abhishek.Sharma/Downloads/papers/holdspec/spec/profiles/stripe_card_default.cfg",
+      "config": "./spec/profiles/stripe_card_default.cfg",
       "ok": true,
       "states_generated": 182,
       "distinct_states": 131,
@@ -31,7 +31,7 @@
     {
       "profile": "stripe_multicapture",
       "module": "HoldSpec",
-      "config": "/Users/Abhishek.Sharma/Downloads/papers/holdspec/spec/profiles/stripe_multicapture.cfg",
+      "config": "./spec/profiles/stripe_multicapture.cfg",
       "ok": true,
       "states_generated": 1032,
       "distinct_states": 642,
@@ -59,7 +59,7 @@
     {
       "profile": "stripe_overcapture",
       "module": "HoldSpec",
-      "config": "/Users/Abhishek.Sharma/Downloads/papers/holdspec/spec/profiles/stripe_overcapture.cfg",
+      "config": "./spec/profiles/stripe_overcapture.cfg",
       "ok": true,
       "states_generated": 215,
       "distinct_states": 155,
@@ -87,7 +87,7 @@
     {
       "profile": "adyen_card_default",
       "module": "HoldSpec",
-      "config": "/Users/Abhishek.Sharma/Downloads/papers/holdspec/spec/profiles/adyen_card_default.cfg",
+      "config": "./spec/profiles/adyen_card_default.cfg",
       "ok": true,
       "states_generated": 249,
       "distinct_states": 182,
@@ -115,7 +115,7 @@
     {
       "profile": "adyen_multiple_partial_captures",
       "module": "HoldSpec",
-      "config": "/Users/Abhishek.Sharma/Downloads/papers/holdspec/spec/profiles/adyen_multiple_partial_captures.cfg",
+      "config": "./spec/profiles/adyen_multiple_partial_captures.cfg",
       "ok": true,
       "states_generated": 1067,
       "distinct_states": 738,
@@ -143,7 +143,7 @@
     {
       "profile": "incremental_auth",
       "module": "HoldSpec",
-      "config": "/Users/Abhishek.Sharma/Downloads/papers/holdspec/spec/profiles/incremental_auth.cfg",
+      "config": "./spec/profiles/incremental_auth.cfg",
       "ok": true,
       "states_generated": 3509,
       "distinct_states": 2248,

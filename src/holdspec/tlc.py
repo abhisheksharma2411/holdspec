@@ -170,7 +170,10 @@ def run_tlc(
     return TLCResult(
         profile=profile_name,
         module=module,
-        config=str(config),
+        # Repository-relative. Recording the resolved path published the
+        # author's local directory layout into every committed result file and
+        # told a reader nothing they could use.
+        config=_repo_relative(config),
         ok=ok,
         states_generated=states,
         distinct_states=distinct,
@@ -181,6 +184,16 @@ def run_tlc(
         trace_length=trace_len,
         stdout_tail=out[-4000:],
     )
+
+
+def _repo_relative(path: Path) -> str:
+    """A path a reader of the artifact can act on, not one from this machine."""
+    root = Path(__file__).resolve().parents[2]
+    resolved = Path(path).resolve()
+    try:
+        return str(resolved.relative_to(root))
+    except ValueError:
+        return resolved.name
 
 
 def _first_declared_property(config: Path) -> Optional[str]:
