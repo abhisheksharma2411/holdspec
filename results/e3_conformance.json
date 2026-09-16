@@ -836,7 +836,7 @@
         "random": 0.6363636363636364,
         "random_10x": 0.7272727272727273
       },
-      "seconds": 2.8
+      "seconds": 2.7
     },
     {
       "profile": "stripe_overcapture",
@@ -2076,7 +2076,7 @@
         "random": 0.5,
         "random_10x": 0.7
       },
-      "seconds": 3.8
+      "seconds": 3.7
     },
     {
       "profile": "incremental_auth",
@@ -2489,7 +2489,7 @@
         "random": 0.6,
         "random_10x": 0.8
       },
-      "seconds": 13.5
+      "seconds": 12.7
     }
   ],
   "overall": {

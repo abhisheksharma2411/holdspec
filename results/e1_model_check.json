@@ -8,7 +8,7 @@
       "states_generated": 182,
       "distinct_states": 131,
       "diameter": 9,
-      "seconds": 0.81,
+      "seconds": 0.63,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -36,7 +36,7 @@
       "states_generated": 1032,
       "distinct_states": 642,
       "diameter": 11,
-      "seconds": 0.79,
+      "seconds": 0.85,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -64,7 +64,7 @@
       "states_generated": 215,
       "distinct_states": 155,
       "diameter": 9,
-      "seconds": 0.74,
+      "seconds": 0.72,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -92,7 +92,7 @@
       "states_generated": 249,
       "distinct_states": 182,
       "diameter": 10,
-      "seconds": 0.66,
+      "seconds": 0.63,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -120,7 +120,7 @@
       "states_generated": 1067,
       "distinct_states": 738,
       "diameter": 12,
-      "seconds": 0.77,
+      "seconds": 0.72,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -148,7 +148,7 @@
       "states_generated": 3509,
       "distinct_states": 2248,
       "diameter": 11,
-      "seconds": 0.76,
+      "seconds": 0.83,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -176,7 +176,7 @@
       "states_generated": 182,
       "distinct_states": 131,
       "diameter": 9,
-      "seconds": 0.63,
+      "seconds": 0.65,
       "ok": true
     },
     {
@@ -185,7 +185,7 @@
       "states_generated": 651,
       "distinct_states": 423,
       "diameter": 10,
-      "seconds": 0.69,
+      "seconds": 0.75,
       "ok": true
     },
     {
@@ -194,7 +194,7 @@
       "states_generated": 1032,
       "distinct_states": 642,
       "diameter": 11,
-      "seconds": 0.75,
+      "seconds": 0.69,
       "ok": true
     },
     {
@@ -203,7 +203,7 @@
       "states_generated": 1268,
       "distinct_states": 788,
       "diameter": 12,
-      "seconds": 0.76,
+      "seconds": 0.71,
       "ok": true
     },
     {
@@ -212,7 +212,7 @@
       "states_generated": 1377,
       "distinct_states": 861,
       "diameter": 13,
-      "seconds": 0.75,
+      "seconds": 0.7,
       "ok": true
     },
     {
@@ -221,7 +221,7 @@
       "states_generated": 573,
       "distinct_states": 358,
       "diameter": 10,
-      "seconds": 0.73,
+      "seconds": 0.66,
       "ok": true
     },
     {
@@ -230,7 +230,7 @@
       "states_generated": 1032,
       "distinct_states": 642,
       "diameter": 11,
-      "seconds": 0.7,
+      "seconds": 0.69,
       "ok": true
     },
     {
@@ -239,7 +239,7 @@
       "states_generated": 1619,
       "distinct_states": 1008,
       "diameter": 12,
-      "seconds": 0.9,
+      "seconds": 0.82,
       "ok": true
     },
     {
@@ -248,7 +248,7 @@
       "states_generated": 2341,
       "distinct_states": 1463,
       "diameter": 13,
-      "seconds": 0.86,
+      "seconds": 0.79,
       "ok": true
     },
     {
@@ -257,7 +257,7 @@
       "states_generated": 3205,
       "distinct_states": 2014,
       "diameter": 14,
-      "seconds": 0.95,
+      "seconds": 0.79,
       "ok": true
     }
   ]

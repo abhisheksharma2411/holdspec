@@ -14,7 +14,7 @@
       "detected": false,
       "violations": [],
       "violation_count": 0,
-      "seconds": 2.4
+      "seconds": 2.2
     },
     "conforms": true,
     "injected_defects": [
@@ -50,7 +50,7 @@
       "detected": false,
       "violations": [],
       "violation_count": 0,
-      "seconds": 20.7
+      "seconds": 22.2
     },
     "conforms": true,
     "injected_defects": [
@@ -86,7 +86,7 @@
       "detected": false,
       "violations": [],
       "violation_count": 0,
-      "seconds": 3.3
+      "seconds": 3.5
     },
     "conforms": true,
     "injected_defects": [
@@ -122,7 +122,7 @@
       "detected": false,
       "violations": [],
       "violation_count": 0,
-      "seconds": 26.0
+      "seconds": 27.1
     },
     "conforms": true,
     "injected_defects": [
