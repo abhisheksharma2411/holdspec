@@ -64,13 +64,24 @@ BORING = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
           "100", "1000", "2024", "2025", "2026", "2027"}
 
 
+def _blank(match: re.Match) -> str:
+    """Replace a span with as many newlines as it had.
+
+    Collapsing a multi-line environment to a single space shifts every line
+    number after it, and a lint that points at the wrong line is worse than no
+    lint: the reader goes to look, finds nothing, and stops trusting it. So
+    keep the line count and drop only the content.
+    """
+    return "\n" * match.group(0).count("\n")
+
+
 def prose(text: str) -> str:
     # The bibliography is dates and page numbers about other people's work.
     text = re.sub(r"\\begin\{thebibliography\}.*?\\end\{thebibliography\}",
-                  " ", text, flags=re.DOTALL)
+                  _blank, text, flags=re.DOTALL)
     for env in SKIP_ENVIRONMENTS:
         text = re.sub(rf"\\begin\{{{re.escape(env)}\}}.*?\\end\{{{re.escape(env)}\}}",
-                      " ", text, flags=re.DOTALL)
+                      _blank, text, flags=re.DOTALL)
     return IGNORE.sub(" ", text)
 
 
@@ -85,6 +96,29 @@ def supported() -> set[str]:
         for m in NUMBER.finditer(gen.read_text()):
             out.add(m.group(1).replace("{,}", "").replace(",", ""))
 
+    # A number verify_claims.py already checks against the artifact is
+    # supported, whether or not it appears verbatim in a results file. Many do
+    # not: a total, a percentage, a difference between two rows. The two tools
+    # answer different halves of the same question and there is no reason for
+    # this one to re-flag what the other has confirmed.
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import verify_claims  # noqa: PLC0415
+
+        for _desc, stated, _computed in verify_claims.build_claims():
+            if isinstance(stated, bool):
+                continue
+            if isinstance(stated, (int, float)):
+                out.add(str(stated))
+                out.add(f"{stated:.1f}")
+                out.add(f"{stated:.2f}")
+                if float(stated).is_integer():
+                    out.add(str(int(stated)))
+    except Exception:
+        # No verifier, or it needs results this checkout does not have. The
+        # lint is still useful without it and should not fail because of it.
+        pass
+
     def walk(node) -> None:
         if isinstance(node, dict):
             for v in node.values():
@@ -94,6 +128,15 @@ def supported() -> set[str]:
                 walk(v)
         elif isinstance(node, bool):
             return
+        elif isinstance(node, str):
+            # Artifacts record plenty of numbers inside strings -- an interval
+            # printed as "[0,120]d", a label, a detail line. Those are the
+            # artifact stating the number as much as a bare field would be.
+            # A plain scan, not NUMBER: in "[0,120]d" the comma separates an
+            # interval's ends, and reading it as a thousands separator turns
+            # 0 and 120 into the single value 0120.
+            for m in re.finditer(r"\d+(?:\.\d+)?", node):
+                out.add(m.group(0))
         elif isinstance(node, (int, float)):
             out.add(str(node))
             out.add(f"{node:.1f}")

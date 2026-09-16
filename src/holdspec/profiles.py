@@ -282,6 +282,16 @@ P_ADYEN_MULTIPLE_PARTIAL = Profile(
             "This must be the same as or, in case of a partial capture, less than "
             "the authorized amount.",
         ),
+        # ``documented_validity_days`` above has always asserted ten days for
+        # this configuration, and the URL backing it was recorded only on
+        # ``adyen_card_default``. The validity is a provider-level fact and
+        # both configurations rest on the same page; citing it here makes an
+        # existing claim auditable instead of leaving it to be taken on trust.
+        "validity": Provenance(
+            _ADYEN_VALIDITY,
+            "The authorisation is valid for a limited period, after which the "
+            "funds are released back to the shopper.",
+        ),
     },
 )
 
