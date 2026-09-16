@@ -295,6 +295,9 @@ def macros() -> None:
         "specmutationscaught": sum(1 for r in e2 if r["caught_by_expected_property_alone"]),
         "specmutationssurvived": sum(1 for r in e2 if not r["caught_by_any_property"]),
         "killablemutants": o["model"]["killable"],
+        # What one detection is worth, so the paper's warning against reading a
+        # two-point gap as an ordering rests on the denominator it names.
+        "pointspermutant": f"{100 / o['model']['killable']:.1f}",
         "modeldetected": o["model"]["detected"],
         "modelrate": f"{o['model']['rate'] * 100:.0f}",
         "randomrate": f"{o['random']['rate'] * 100:.0f}",
