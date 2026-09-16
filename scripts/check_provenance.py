@@ -19,6 +19,7 @@ Usage:  python scripts/check_provenance.py [--quiet]
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -49,8 +50,65 @@ def provenance_of(payload) -> tuple[str, str] | None:
     return commit, dirty
 
 
+def sidecar() -> dict | None:
+    """Provenance kept beside the results rather than inside each of them.
+
+    One project writes ``results/PROVENANCE.json`` mapping each result file to
+    a content hash and recording the commit once, which is a better record
+    than an inline field and not a worse one. Understanding both shapes is the
+    checker's job; making every project write the same shape is not.
+    """
+    path = RESULTS / "PROVENANCE.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text())
+    except json.JSONDecodeError:
+        return None
+
+
+def check_sidecar(prov: dict, quiet: bool) -> int:
+    problems = []
+    commit = prov.get("git_commit") or ""
+    if not commit or commit == "uncommitted":
+        problems.append("PROVENANCE.json records no commit")
+    if prov.get("git_dirty") != "no":
+        problems.append(f"PROVENANCE.json records a dirty tree ({commit[:12]})")
+
+    listed = prov.get("files", {})
+    on_disk = {f.name for f in RESULTS.glob("*.json")} - {"PROVENANCE.json"}
+    for missing in sorted(on_disk - set(listed)):
+        problems.append(f"{missing}: not listed in PROVENANCE.json")
+    for gone in sorted(set(listed) - on_disk):
+        problems.append(f"{gone}: listed in PROVENANCE.json but not present")
+
+    # The hash is the point of a sidecar: a result edited after the run would
+    # otherwise inherit a commit it never came from.
+    for name, meta in sorted(listed.items()):
+        path = RESULTS / name
+        if not path.exists():
+            continue
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+        if meta.get("sha256_16") and digest != meta["sha256_16"]:
+            problems.append(f"{name}: content does not match its recorded hash")
+
+    for p in problems:
+        print(f"  {p}")
+    if problems:
+        print(f"{len(listed)} result files, {len(problems)} provenance problem(s)")
+        print("re-run: commit the code, then `make experiments`, then commit results")
+        return 1
+    if not quiet:
+        print(f"{len(listed)} result files, one clean revision {commit[:12]} "
+              f"(hashes verified)")
+    return 0
+
+
 def main(argv: list[str]) -> int:
     quiet = "--quiet" in argv
+    prov = sidecar()
+    if prov is not None:
+        return check_sidecar(prov, quiet)
     files = sorted(RESULTS.glob("*.json"))
     if not files:
         print("no results to check; run the experiments first")

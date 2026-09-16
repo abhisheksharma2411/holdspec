@@ -21,6 +21,25 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
 
 
+#: Paths that are outputs of a run rather than inputs to it. A run writes its
+#: own results, so counting them makes every batch look dirty after its first
+#: experiment. What has to be committed is the code and the data that went in.
+GENERATED = ("results/", "figures/", "paper/")
+
+
+def _dirty_inputs() -> str:
+    out = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain"],
+                         capture_output=True, text=True, timeout=10).stdout.splitlines()
+    changed = []
+    for line in out:
+        path = line[3:].strip().strip('"')
+        if " -> " in path:
+            path = path.split(" -> ")[-1]
+        if not any(path.startswith(g) for g in GENERATED):
+            changed.append(path)
+    return "; ".join(sorted(changed))
+
+
 def _git() -> dict[str, str]:
     info = {"commit": "uncommitted", "dirty": "unknown"}
     try:
@@ -28,10 +47,7 @@ def _git() -> dict[str, str]:
                               capture_output=True, text=True, timeout=5)
         if head.returncode == 0 and head.stdout.strip():
             info["commit"] = head.stdout.strip()
-        status = subprocess.run(["git", "-C", str(ROOT), "status", "--porcelain"],
-                                capture_output=True, text=True, timeout=5)
-        if status.returncode == 0:
-            info["dirty"] = "yes" if status.stdout.strip() else "no"
+        info["dirty"] = "yes" if _dirty_inputs() else "no"
     except Exception:
         pass
     return info
