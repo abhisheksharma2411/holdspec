@@ -3,12 +3,12 @@
     {
       "profile": "stripe_card_default",
       "module": "HoldSpec",
-      "config": "./spec/profiles/stripe_card_default.cfg",
+      "config": "spec/profiles/stripe_card_default.cfg",
       "ok": true,
       "states_generated": 182,
       "distinct_states": 131,
       "diameter": 9,
-      "seconds": 0.6,
+      "seconds": 0.81,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -31,12 +31,12 @@
     {
       "profile": "stripe_multicapture",
       "module": "HoldSpec",
-      "config": "./spec/profiles/stripe_multicapture.cfg",
+      "config": "spec/profiles/stripe_multicapture.cfg",
       "ok": true,
       "states_generated": 1032,
       "distinct_states": 642,
       "diameter": 11,
-      "seconds": 0.67,
+      "seconds": 0.79,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -59,12 +59,12 @@
     {
       "profile": "stripe_overcapture",
       "module": "HoldSpec",
-      "config": "./spec/profiles/stripe_overcapture.cfg",
+      "config": "spec/profiles/stripe_overcapture.cfg",
       "ok": true,
       "states_generated": 215,
       "distinct_states": 155,
       "diameter": 9,
-      "seconds": 0.61,
+      "seconds": 0.74,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -87,12 +87,12 @@
     {
       "profile": "adyen_card_default",
       "module": "HoldSpec",
-      "config": "./spec/profiles/adyen_card_default.cfg",
+      "config": "spec/profiles/adyen_card_default.cfg",
       "ok": true,
       "states_generated": 249,
       "distinct_states": 182,
       "diameter": 10,
-      "seconds": 0.62,
+      "seconds": 0.66,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -115,12 +115,12 @@
     {
       "profile": "adyen_multiple_partial_captures",
       "module": "HoldSpec",
-      "config": "./spec/profiles/adyen_multiple_partial_captures.cfg",
+      "config": "spec/profiles/adyen_multiple_partial_captures.cfg",
       "ok": true,
       "states_generated": 1067,
       "distinct_states": 738,
       "diameter": 12,
-      "seconds": 0.68,
+      "seconds": 0.77,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -143,12 +143,12 @@
     {
       "profile": "incremental_auth",
       "module": "HoldSpec",
-      "config": "./spec/profiles/incremental_auth.cfg",
+      "config": "spec/profiles/incremental_auth.cfg",
       "ok": true,
       "states_generated": 3509,
       "distinct_states": 2248,
       "diameter": 11,
-      "seconds": 0.81,
+      "seconds": 0.76,
       "violated": null,
       "violation_kind": null,
       "trace_length": null,
@@ -176,7 +176,7 @@
       "states_generated": 182,
       "distinct_states": 131,
       "diameter": 9,
-      "seconds": 0.73,
+      "seconds": 0.63,
       "ok": true
     },
     {
@@ -185,7 +185,7 @@
       "states_generated": 651,
       "distinct_states": 423,
       "diameter": 10,
-      "seconds": 0.67,
+      "seconds": 0.69,
       "ok": true
     },
     {
@@ -194,7 +194,7 @@
       "states_generated": 1032,
       "distinct_states": 642,
       "diameter": 11,
-      "seconds": 0.79,
+      "seconds": 0.75,
       "ok": true
     },
     {
@@ -203,7 +203,7 @@
       "states_generated": 1268,
       "distinct_states": 788,
       "diameter": 12,
-      "seconds": 0.9,
+      "seconds": 0.76,
       "ok": true
     },
     {
@@ -212,7 +212,7 @@
       "states_generated": 1377,
       "distinct_states": 861,
       "diameter": 13,
-      "seconds": 0.7,
+      "seconds": 0.75,
       "ok": true
     },
     {
@@ -221,7 +221,7 @@
       "states_generated": 573,
       "distinct_states": 358,
       "diameter": 10,
-      "seconds": 0.65,
+      "seconds": 0.73,
       "ok": true
     },
     {
@@ -230,7 +230,7 @@
       "states_generated": 1032,
       "distinct_states": 642,
       "diameter": 11,
-      "seconds": 0.68,
+      "seconds": 0.7,
       "ok": true
     },
     {
@@ -239,7 +239,7 @@
       "states_generated": 1619,
       "distinct_states": 1008,
       "diameter": 12,
-      "seconds": 0.7,
+      "seconds": 0.9,
       "ok": true
     },
     {
@@ -248,7 +248,7 @@
       "states_generated": 2341,
       "distinct_states": 1463,
       "diameter": 13,
-      "seconds": 0.75,
+      "seconds": 0.86,
       "ok": true
     },
     {
@@ -257,7 +257,7 @@
       "states_generated": 3205,
       "distinct_states": 2014,
       "diameter": 14,
-      "seconds": 0.79,
+      "seconds": 0.95,
       "ok": true
     }
   ]

@@ -6,10 +6,10 @@
     "expected_property": "INV_NoCaptureAfterExpiry",
     "first_property_to_fail": "INV_NoCaptureAfterExpiry",
     "violation_kind": "invariant",
-    "counterexample_length": 7,
+    "counterexample_length": 8,
     "caught_by_expected_property_alone": true,
     "caught_by_any_property": true,
-    "seconds": 1.25
+    "seconds": 1.3
   },
   {
     "mutation": "S02_capture_ignores_ceiling",
@@ -21,7 +21,7 @@
     "counterexample_length": 5,
     "caught_by_expected_property_alone": true,
     "caught_by_any_property": true,
-    "seconds": 1.18
+    "seconds": 1.21
   },
   {
     "mutation": "S03_release_twice",
@@ -33,7 +33,7 @@
     "counterexample_length": 7,
     "caught_by_expected_property_alone": true,
     "caught_by_any_property": true,
-    "seconds": 1.21
+    "seconds": 1.24
   },
   {
     "mutation": "S04_release_while_open",
@@ -42,10 +42,10 @@
     "expected_property": "INV_NoReleaseBeforeClose",
     "first_property_to_fail": "INV_NoReleaseBeforeClose",
     "violation_kind": "invariant",
-    "counterexample_length": 5,
+    "counterexample_length": 4,
     "caught_by_expected_property_alone": true,
     "caught_by_any_property": true,
-    "seconds": 1.38
+    "seconds": 1.34
   },
   {
     "mutation": "S05_release_deadline_not_enforced",
@@ -54,10 +54,10 @@
     "expected_property": "INV_BoundedRelease",
     "first_property_to_fail": "INV_BoundedRelease",
     "violation_kind": "invariant",
-    "counterexample_length": 7,
+    "counterexample_length": 8,
     "caught_by_expected_property_alone": true,
     "caught_by_any_property": true,
-    "seconds": 1.33
+    "seconds": 1.18
   },
   {
     "mutation": "S06_non_final_budget_ignored",
@@ -69,7 +69,7 @@
     "counterexample_length": 6,
     "caught_by_expected_property_alone": true,
     "caught_by_any_property": true,
-    "seconds": 1.19
+    "seconds": 1.36
   },
   {
     "mutation": "S07_close_forgets_captured_total",
@@ -81,7 +81,7 @@
     "counterexample_length": 3,
     "caught_by_expected_property_alone": true,
     "caught_by_any_property": true,
-    "seconds": 1.42
+    "seconds": 1.18
   },
   {
     "mutation": "S08_no_release_fairness",
@@ -93,7 +93,7 @@
     "counterexample_length": 8,
     "caught_by_expected_property_alone": true,
     "caught_by_any_property": true,
-    "seconds": 1.3
+    "seconds": 2.1
   },
   {
     "mutation": "S09_no_expiry_fairness",
@@ -105,7 +105,7 @@
     "counterexample_length": 8,
     "caught_by_expected_property_alone": true,
     "caught_by_any_property": true,
-    "seconds": 1.31
+    "seconds": 1.47
   },
   {
     "mutation": "S10_no_authorize_fairness",
@@ -117,6 +117,6 @@
     "counterexample_length": 2,
     "caught_by_expected_property_alone": true,
     "caught_by_any_property": true,
-    "seconds": 1.38
+    "seconds": 1.35
   }
 ]

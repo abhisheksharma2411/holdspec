@@ -38,14 +38,19 @@ def main() -> int:
         print("experiments reporting a problem: " + ", ".join(failures))
     else:
         print("all experiments completed and agreed with the specification")
+
+    # Record which revision produced these files. Without this a reader cannot
+    # map a number in the paper back to the code that generated it.
+    #
+    # This block sat after the ``raise SystemExit`` below and had therefore
+    # never run, so PROVENANCE.json kept the hashes of whichever results
+    # happened to exist when it was last written by hand. The hash check in
+    # scripts/check_provenance.py is what found it.
+    from _provenance import write_provenance
+    path = write_provenance()
+    print(f"  wrote {path.name}")
     return 1 if failures else 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-    # Record which revision produced these files. Without this a reader cannot
-    # map a number in the paper back to the code that generated it.
-    from _provenance import write_provenance
-    path = write_provenance()
-    print(f"  wrote {path.name}")
